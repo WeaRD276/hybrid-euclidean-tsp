@@ -267,3 +267,9 @@ Then iterate:
 ---
 
 This is the **correct minimal starting point**.
+
+## First Neural Model Result
+
+The minimal EdgeGNN was trained on 1000 Euclidean TSP instances with n=10 and evaluated on 200 held-out test instances. The model predicts whether each directed edge belongs to the optimal tour.
+
+Compared with the n-shortest-edge baseline, EdgeGNN improves F1 from 0.620 to 0.703. This suggests that the model learns more than simple edge length: it captures some graph-level structure useful for identifying optimal tour edges.

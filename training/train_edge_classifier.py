@@ -7,8 +7,6 @@ import numpy as np
 import torch
 from torch_geometric.loader import DataLoader
 
-# Allow running as:
-# python training/train_edge_classifier.py
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -24,13 +22,19 @@ from training.torch_dataset import to_pyg
 N = 10
 TRAIN_GRAPHS = 1000
 VAL_GRAPHS = 200
+TEST_GRAPHS = 200
+
 TRAIN_SEED_OFFSET = 0
 VAL_SEED_OFFSET = 10000
+TEST_SEED_OFFSET = 20000
 
 BATCH_SIZE = 32
 EPOCHS = 20
 LR = 1e-3
-THRESHOLD = 0.5
+# THRESHOLD = 0.5
+THRESHOLDS = [i / 100 for i in range(5, 96, 5)]
+RESULTS_PATH = "experiments/results_n10.md"
+CHECKPOINT_PATH = "checkpoints/edge_gnn_n10_best.pt"
 
 
 def build_pyg_dataset(num_samples: int, n: int, seed_offset: int):
@@ -53,7 +57,6 @@ def train_one_epoch(model, loader, optimizer, loss_fn, device):
         batch = batch.to(device)
 
         optimizer.zero_grad()
-
         logits = model(batch)
         loss = loss_fn(logits, batch.y)
 
@@ -68,12 +71,11 @@ def train_one_epoch(model, loader, optimizer, loss_fn, device):
 
 
 @torch.no_grad()
-def evaluate_model(model, loader, loss_fn, device):
+def evaluate_model(model, loader, loss_fn, device, threshold: float = 0.5):
     model.eval()
 
     total_loss = 0.0
     total_edges = 0
-
     total_conf = {"tp": 0, "tn": 0, "fp": 0, "fn": 0}
 
     for batch in loader:
@@ -83,7 +85,7 @@ def evaluate_model(model, loader, loss_fn, device):
         loss = loss_fn(logits, batch.y)
 
         probs = torch.sigmoid(logits)
-        preds = (probs >= THRESHOLD).long().cpu().numpy()
+        preds = (probs >= threshold).long().cpu().numpy()
         targets = batch.y.long().cpu().numpy()
 
         conf = compute_confusion(targets, preds)
@@ -94,38 +96,100 @@ def evaluate_model(model, loader, loss_fn, device):
         total_loss += loss.item() * num_edges
         total_edges += num_edges
 
-    metrics = compute_metrics(total_conf)
-    avg_loss = total_loss / total_edges
+    return total_loss / total_edges, compute_metrics(total_conf), total_conf
 
-    return avg_loss, metrics, total_conf
+@torch.no_grad()
+def find_best_threshold(model, loader, loss_fn, device):
+    best_threshold = None
+    best_loss = None
+    best_metrics = None
+    best_conf = None
+    best_f1 = -1.0
+
+    for threshold in THRESHOLDS:
+        loss, metrics, conf = evaluate_model(
+            model=model,
+            loader=loader,
+            loss_fn=loss_fn,
+            device=device,
+            threshold=threshold,
+        )
+
+        if metrics["f1"] > best_f1:
+            best_f1 = metrics["f1"]
+            best_threshold = threshold
+            best_loss = loss
+            best_metrics = metrics
+            best_conf = conf
+
+    return best_threshold, best_loss, best_metrics, best_conf
 
 
-def evaluate_baseline_on_raw_dataset(raw_dataset, predictor, name: str):
+def evaluate_baseline_on_raw_dataset(raw_dataset, predictor):
     total_conf = {"tp": 0, "tn": 0, "fp": 0, "fn": 0}
 
     for graph in raw_dataset:
         y_true = graph.y.astype(np.int32)
         y_pred = predictor(graph).astype(np.int32)
 
+        assert y_true.shape == y_pred.shape
+
         conf = compute_confusion(y_true, y_pred)
         for key in total_conf:
             total_conf[key] += conf[key]
 
-    metrics = compute_metrics(total_conf)
+    return compute_metrics(total_conf)
 
-    print(f"=== {name} ===")
-    print(
-        f"TP={total_conf['tp']}  TN={total_conf['tn']}  "
-        f"FP={total_conf['fp']}  FN={total_conf['fn']}"
-    )
-    print(f"accuracy : {metrics['accuracy']:.6f}")
-    print(f"precision: {metrics['precision']:.6f}")
-    print(f"recall   : {metrics['recall']:.6f}")
-    print(f"f1       : {metrics['f1']:.6f}")
+
+def print_final_table(rows):
     print()
+    print("Final test results:")
+    print()
+    print("| method           | precision | recall | F1 |")
+    print("| ---------------- | --------: | -----: | --: |")
 
-    return metrics
+    for method, metrics in rows:
+        print(
+            f"| {method:<16} | "
+            f"{metrics['precision']:9.6f} | "
+            f"{metrics['recall']:6.6f} | "
+            f"{metrics['f1']:.6f} |"
+        )
 
+
+def save_results_markdown(
+    path,
+    best_epoch,
+    best_val_f1,
+    best_threshold,
+    val_metrics_at_threshold,
+    test_loss,
+    rows,
+):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    lines = []
+    lines.append("# Results for n = 10")
+    lines.append("")
+    lines.append(f"- Best epoch: {best_epoch}")
+    lines.append(f"- Best validation F1 during training at threshold 0.5: {best_val_f1:.6f}")
+    lines.append(f"- Selected validation threshold: {best_threshold:.2f}")
+    lines.append(f"- Validation F1 at selected threshold: {val_metrics_at_threshold['f1']:.6f}")
+    lines.append(f"- EdgeGNN test loss: {test_loss:.6f}")
+    lines.append("")
+    lines.append("| method | precision | recall | F1 |")
+    lines.append("| --- | ---: | ---: | ---: |")
+
+    for method, metrics in rows:
+        lines.append(
+            f"| {method} | "
+            f"{metrics['precision']:.6f} | "
+            f"{metrics['recall']:.6f} | "
+            f"{metrics['f1']:.6f} |"
+        )
+
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 def main():
     torch.manual_seed(47)
@@ -136,35 +200,25 @@ def main():
     print()
 
     print("Building datasets...")
-    train_raw, train_dataset = build_pyg_dataset(
-        num_samples=TRAIN_GRAPHS,
-        n=N,
-        seed_offset=TRAIN_SEED_OFFSET,
-    )
-    val_raw, val_dataset = build_pyg_dataset(
-        num_samples=VAL_GRAPHS,
-        n=N,
-        seed_offset=VAL_SEED_OFFSET,
-    )
+    train_raw, train_dataset = build_pyg_dataset(TRAIN_GRAPHS, N, TRAIN_SEED_OFFSET)
+    val_raw, val_dataset = build_pyg_dataset(VAL_GRAPHS, N, VAL_SEED_OFFSET)
+    test_raw, test_dataset = build_pyg_dataset(TEST_GRAPHS, N, TEST_SEED_OFFSET)
 
-    train_loader = DataLoader(
-        train_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=True,
-    )
-    val_loader = DataLoader(
-        val_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=False,
-    )
+    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
     print(f"Train graphs: {len(train_dataset)}")
     print(f"Val graphs:   {len(val_dataset)}")
+    print(f"Test graphs:  {len(test_dataset)}")
     print()
 
     model = EdgeGNN(hidden_dim=64).to(device)
     loss_fn = make_loss_fn(num_nodes=N, device=device)
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
+
+    checkpoint_path = Path(CHECKPOINT_PATH)
+    checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
 
     print("Training EdgeGNN...")
     best_val_f1 = -1.0
@@ -189,6 +243,7 @@ def main():
         if val_metrics["f1"] > best_val_f1:
             best_val_f1 = val_metrics["f1"]
             best_epoch = epoch
+            torch.save(model.state_dict(), checkpoint_path)
 
         print(
             f"Epoch {epoch:02d} | "
@@ -201,19 +256,67 @@ def main():
 
     print()
     print(f"Best neural val F1: {best_val_f1:.6f} at epoch {best_epoch}")
+    print(f"Saved checkpoint: {checkpoint_path}")
     print()
 
-    print("Baselines on the same validation dataset:")
-    evaluate_baseline_on_raw_dataset(
-        raw_dataset=val_raw,
+    best_model = EdgeGNN(hidden_dim=64).to(device)
+    best_model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+
+    best_threshold, val_loss_thr, val_metrics_thr, _ = find_best_threshold(
+        model=best_model,
+        loader=val_loader,
+        loss_fn=loss_fn,
+        device=device,
+    )
+
+    print(
+        f"Best validation threshold: {best_threshold:.2f} | "
+        f"val_precision={val_metrics_thr['precision']:.6f} | "
+        f"val_recall={val_metrics_thr['recall']:.6f} | "
+        f"val_f1={val_metrics_thr['f1']:.6f}"
+    )
+    print()
+
+    test_loss, edge_gnn_metrics, _ = evaluate_model(
+        model=best_model,
+        loader=test_loader,
+        loss_fn=loss_fn,
+        device=device,
+        threshold=best_threshold,
+    )
+
+    print(f"Best EdgeGNN test loss: {test_loss:.6f}")
+
+    all_zeros_metrics = evaluate_baseline_on_raw_dataset(
+        raw_dataset=test_raw,
         predictor=predict_all_zeros,
-        name="All zeros",
     )
-    evaluate_baseline_on_raw_dataset(
-        raw_dataset=val_raw,
+
+    shortest_edges_metrics = evaluate_baseline_on_raw_dataset(
+        raw_dataset=test_raw,
         predictor=predict_shortest_edges_unconstrained,
-        name="n shortest undirected edges",
     )
+
+    final_rows = [
+        ("all zeros", all_zeros_metrics),
+        ("n shortest edges", shortest_edges_metrics),
+        ("EdgeGNN", edge_gnn_metrics),
+    ]
+
+    print_final_table(final_rows)
+
+    save_results_markdown(
+        path=RESULTS_PATH,
+        best_epoch=best_epoch,
+        best_val_f1=best_val_f1,
+        best_threshold=best_threshold,
+        val_metrics_at_threshold=val_metrics_thr,
+        test_loss=test_loss,
+        rows=final_rows,
+    )
+
+    print()
+    print(f"Saved results to: {RESULTS_PATH}")
 
 
 if __name__ == "__main__":
