@@ -86,7 +86,6 @@ def evaluate_baseline(
 
 
 def main() -> None:
-    # You can change these values whenever needed.
     num_samples = 200
     n = 10
     seed_offset = 20000

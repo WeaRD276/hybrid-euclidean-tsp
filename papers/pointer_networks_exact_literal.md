@@ -1,5 +1,3 @@
-Here is a **focused, structured analysis of the Pointer Networks paper** (Vinyals et al., 2015) tailored exactly to your questions.
-
 * * *
 
 🔑 Core Idea (1 sentence)
@@ -223,7 +221,7 @@ So:
 
 * * *
 
-5. 🎯 Summary (what you should remember)
+5. 🎯 Summary (what I should remember)
 =========================================
 
 ### Problem setting
@@ -276,12 +274,12 @@ So:
 
 * * *
 
-🚀 Connection to YOUR project (important insight)
+🚀 Connection to MY project (important insight)
 =================================================
 
-Your setup (edge prediction / TSP):
+My setup (edge prediction / TSP):
 
-*   You are essentially learning:
+*   I am essentially learning:
 
 
 f(points)→edges / permutationf(\text{points}) \rightarrow \text{edges / permutation}f(points)→edges / permutation

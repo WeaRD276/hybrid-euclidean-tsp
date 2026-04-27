@@ -19,8 +19,6 @@ The paper organizes methods along **two orthogonal axes**:
 *   **ML as auxiliary predictor (parameterization)**
 
 
-We map this to your requested categories:
-
 * * *
 
 1.1 Constructive methods (end-to-end)
@@ -110,7 +108,7 @@ ML model decides step (branch, cut, heuristic)
 1.3 Learning heuristics (neural-guided heuristics)
 --------------------------------------------------
 
-This is the **middle ground** (very important for your thesis).
+This is the **middle ground** (very important for my thesis).
 
 ### Definition
 
@@ -255,7 +253,7 @@ Constructive
 
     *   Pointer Networks
 
-    *   Attention Model (your method)
+    *   Attention Model (my method)
 
 
 Improvement
@@ -325,10 +323,10 @@ They sit **between both worlds**
 
 * * *
 
-5. Where your method belongs
+5. Where my method belongs
 =============================
 
-Your method:
+My method:
 
 *   Attention model for TSP
 
@@ -362,10 +360,10 @@ Classification:
 Final classification (clean)
 ----------------------------
 
-| Axis | Your method |
-| --- | --- |
-| Learning | Reinforcement Learning |
-| Structure | Constructive |
+| Axis | My method                |
+| --- |--------------------------|
+| Learning | Reinforcement Learning   |
+| Structure | Constructive             |
 | Role | Learned heuristic policy |
 | Framework | End-to-end neural solver |
 

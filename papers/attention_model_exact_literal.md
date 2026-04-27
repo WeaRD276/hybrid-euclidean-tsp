@@ -176,7 +176,7 @@ Instead of supervised labels or a learned critic as the main method, they propos
 They argue this is more effective and efficient than a critic/value-function baseline. They also explicitly state in the abstract that they train using REINFORCE with a simple greedy rollout baseline, and found it more efficient than using a value function.
 
 
-So for your extraction:
+So for my extraction:
 
 *   **Not supervised** in the main method
 
@@ -192,7 +192,7 @@ So for your extraction:
 4. How routing instances are encoded
 =====================================
 
-This is the concise version for your notes:
+This is the concise version for my notes:
 
 TSP
 ---
@@ -361,7 +361,7 @@ So “construct full solution directly” means:
 8. Why this differs from Pointer Networks
 ==========================================
 
-This may help your comparison with the previous paper.
+This may help my comparison with the previous paper.
 
 Pointer Net:
 

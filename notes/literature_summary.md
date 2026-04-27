@@ -269,7 +269,7 @@ Both supervised and reinforcement learning
 ### Relation to our project
 Can be useful to enderstand the general concepts.
 
-### Our position
+### My position
 Many neural TSP papers predict a full tour because TSP is naturally represented as a permutation problem, and architectures like Pointer Networks and attention decoders were designed to output permutations directly, one node at a time.
 
 This makes the method an end-to-end constructive heuristic.

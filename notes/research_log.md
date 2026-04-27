@@ -1,4 +1,4 @@
-## What conclusions you should I to reach while reading
+## What conclusions should I reach while reading
 
 Why do many neural TSP papers predict a full tour instead of edge labels?
 What makes full-tour prediction difficult?
@@ -81,13 +81,13 @@ Build the **simplest possible neural model** that is:
 
 ## Model Overview
 
-We design a **3-part architecture**:
+Design a **3-part architecture**:
 
 1. Node encoder  
 2. Message passing  
 3. Edge classifier  
 
-This directly matches your dataset structure:
+This directly matches my dataset structure:
 
 - Nodes → coordinates `x ∈ ℝ^{n×2}`
 - Edges → features `[dx, dy, dist]`
@@ -160,7 +160,7 @@ h_i (source node embedding)
 h_j (target node embedding)
 dx, dy, d (edge features)
 
-From your dataset:
+From my dataset:
 
 - edge features are built as `[dx, dy, dist]` :contentReference[oaicite:1]{index=1}
 
@@ -193,11 +193,11 @@ Why?
 
 ---
 
-## Why This Model is Correct for Your Project
+## Why This Model is Correct for my Project
 
-### 1. Matches your research idea
+### 1. Matches my research idea
 
-- You are predicting **edge importance**, not full tours  
+- I am predicting **edge importance**, not full tours  
 - Labels come directly from optimal solution (`isOpt`) via Held-Karp :contentReference[oaicite:2]{index=2}  
 
 ---
@@ -207,7 +207,7 @@ Why?
 - Neural network → predicts edge scores  
 - Classical algorithm → reconstructs tour  
 
-This is exactly your intended hybrid approach.
+This is exactly my intended hybrid approach.
 
 ---
 
@@ -216,7 +216,7 @@ This is exactly your intended hybrid approach.
 Instead of:
 model → permutation of nodes
 
-you do:
+I do:
 model → edge probabilities
 
 Which is:
@@ -227,7 +227,7 @@ Which is:
 
 ---
 
-### 4. Fully compatible with your pipeline
+### 4. Fully compatible with the pipeline
 
 - Works directly with `TSPGraphData`
 - Uses existing dataset generator :contentReference[oaicite:3]{index=3}  

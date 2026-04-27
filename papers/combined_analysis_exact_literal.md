@@ -163,7 +163,7 @@ So edge classification can be simpler and more interpretable because it is:
 4. How can edge scores be integrated into a classical heuristic?
 =================================================================
 
-This is exactly where your approach becomes attractive.
+This is exactly where my approach becomes attractive.
 
 The survey’s strongest general recommendation is that ML should often be used **alongside optimization algorithms**, where a master algorithm repeatedly queries an ML model for decisions, while the classical framework preserves structure and validity.
 
@@ -228,10 +228,10 @@ Then let a classical solver refine or certify. This is consistent with the surve
 
 * * *
 
-5. Where your method fits in this picture
+5. Where my method fits in this picture
 ==========================================
 
-From the survey’s taxonomy, your edge-classification idea is **not** a pure end-to-end constructive solver. It belongs much more naturally to:
+From the survey’s taxonomy, my edge-classification idea is **not** a pure end-to-end constructive solver. It belongs much more naturally to:
 
 *   **learning heuristics**
 
