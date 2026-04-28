@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# PyTorch / model outputs
+checkpoints/
+*.pt
+*.pth
+
+# Generated datasets
+data/saved/
+*.pkl
+
+# Generated experiment outputs
+experiments/results_*.md
+experiments/thresholds_*.csv
+experiments/plots/
+experiments/figures/
+*.png
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store

@@ -9,6 +9,7 @@ from torch_geometric.data import Data
 
 from data.serialization import load_sample
 from data.graph_builder import TSPGraphData
+from data.dataset_generator import build_dataset
 
 
 def to_pyg(sample: TSPGraphData) -> Data:
@@ -32,3 +33,12 @@ class TSPPyGDataset(Dataset):
     def __getitem__(self, idx: int) -> Data:
         sample = load_sample(self.files[idx])
         return to_pyg(sample)
+
+def build_pyg_dataset(num_samples: int, n: int, seed_offset: int):
+    raw_dataset = build_dataset(
+        num_samples=num_samples,
+        n=n,
+        seed_offset=seed_offset,
+    )
+    pyg_dataset = [to_pyg(sample) for sample in raw_dataset]
+    return raw_dataset, pyg_dataset

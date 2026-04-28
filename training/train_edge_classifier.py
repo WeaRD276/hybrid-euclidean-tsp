@@ -16,7 +16,7 @@ from baselines.shortest_edges import predict_shortest_edges_unconstrained
 from data.dataset_generator import build_dataset
 from experiments.evaluate import compute_confusion, compute_metrics
 from models.edge_gnn import EdgeGNN, make_loss_fn
-from training.torch_dataset import to_pyg
+from training.torch_dataset import to_pyg, build_pyg_dataset
 
 
 N = 10
@@ -38,16 +38,6 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 CHECKPOINT_PATH = PROJECT_ROOT / "checkpoints" / "edge_gnn_n10_best.pt"
 RESULTS_PATH = PROJECT_ROOT / "experiments" / "results_n10.md"
-
-
-def build_pyg_dataset(num_samples: int, n: int, seed_offset: int):
-    raw_dataset = build_dataset(
-        num_samples=num_samples,
-        n=n,
-        seed_offset=seed_offset,
-    )
-    pyg_dataset = [to_pyg(sample) for sample in raw_dataset]
-    return raw_dataset, pyg_dataset
 
 
 def train_one_epoch(model, loader, optimizer, loss_fn, device):

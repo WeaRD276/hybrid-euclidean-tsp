@@ -12,30 +12,19 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from data.dataset_generator import build_dataset
-from training.torch_dataset import to_pyg
-
-
-def build_pyg_dataset(num_samples: int, n: int, seed_offset: int):
-    raw_dataset = build_dataset(
-        num_samples=num_samples,
-        n=n,
-        seed_offset=seed_offset,
-    )
-
-    pyg_dataset = [to_pyg(sample) for sample in raw_dataset]
-    return pyg_dataset
+from training.torch_dataset import to_pyg, build_pyg_dataset
 
 
 def main() -> None:
     n = 10
 
-    train_dataset = build_pyg_dataset(
+    _, train_dataset = build_pyg_dataset(
         num_samples=1000,
         n=n,
         seed_offset=0,
     )
 
-    val_dataset = build_pyg_dataset(
+    _, val_dataset = build_pyg_dataset(
         num_samples=200,
         n=n,
         seed_offset=10000,
