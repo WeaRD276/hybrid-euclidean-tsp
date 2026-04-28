@@ -24,7 +24,7 @@ from training.train_edge_classifier import (
 )
 
 
-OUT_PATH = "experiments/thresholds_n10.csv"
+OUT_PATH = "outputs/tables/thresholds_n10.csv"
 
 
 def save_threshold_results(path: str | Path, rows) -> None:

@@ -25,3 +25,9 @@ experiments/figures/
 .idea/
 .vscode/
 .DS_Store
+
+*.pyc
+
+outputs/
+
+papers/

@@ -36,9 +36,8 @@ THRESHOLDS = [i / 100 for i in range(5, 96, 5)]
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-CHECKPOINT_PATH = PROJECT_ROOT / "checkpoints" / "edge_gnn_n10_best.pt"
-RESULTS_PATH = PROJECT_ROOT / "experiments" / "results_n10.md"
-
+CHECKPOINT_PATH = PROJECT_ROOT / "outputs/checkpoints/edge_gnn_n10_best.pt"
+RESULTS_PATH = PROJECT_ROOT / "outputs/reports/results_n10.md"
 
 def train_one_epoch(model, loader, optimizer, loss_fn, device):
     model.train()

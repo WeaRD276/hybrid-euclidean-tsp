@@ -29,9 +29,9 @@ from training.train_edge_classifier import (
 from training.torch_dataset import to_pyg
 
 
-THRESHOLD_OUT = ROOT / "experiments" / "thresholds_n10.csv"
-DISTANCE_OUT = ROOT / "experiments" / "distance_analysis_n10.md"
-PLOTS_OUT = ROOT / "plots" / "graphs"
+THRESHOLD_OUT = ROOT / "outputs" / "tables" / "thresholds_n10.csv"
+DISTANCE_OUT = ROOT / "outputs" / "reports" / "distance_analysis_n10.md"
+PLOTS_OUT = ROOT / "outputs" / "plots" / "graphs"
 
 BEST_THRESHOLD = 0.60
 NUM_VISUALIZATIONS = 3
@@ -144,4 +144,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-    
