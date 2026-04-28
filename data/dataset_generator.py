@@ -38,9 +38,9 @@ def generate_split(
 
 
 def generate_all_splits() -> None:
-    generate_split("data/saved/train", num_samples=1000, n=10, seed_offset=0)
-    generate_split("data/saved/val", num_samples=200, n=10, seed_offset=10000)
-    generate_split("data/saved/test", num_samples=200, n=10, seed_offset=20000)
+    generate_split("outputs/datasets/train", num_samples=1000, n=10, seed_offset=0)
+    generate_split("outputs/datasets/val", num_samples=200, n=10, seed_offset=10000)
+    generate_split("outputs/datasets/test", num_samples=200, n=10, seed_offset=20000)
 
 
 def main():

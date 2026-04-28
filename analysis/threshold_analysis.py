@@ -49,63 +49,63 @@ def save_threshold_results(path: str | Path, rows) -> None:
             )
 
 
-def main() -> None:
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    _, test_dataset = build_pyg_dataset(
-        num_samples=TEST_GRAPHS,
-        n=N,
-        seed_offset=TEST_SEED_OFFSET,
-    )
-
-    test_loader = DataLoader(
-        test_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=False,
-    )
-
-    model = EdgeGNN(hidden_dim=64).to(device)
-
-    checkpoint_path = Path(CHECKPOINT_PATH)
-
-    if not checkpoint_path.exists():
-        raise FileNotFoundError(
-            f"Checkpoint not found: {checkpoint_path}\n"
-            "Run training first:\n"
-            "python training/train_edge_classifier.py"
-        )
-
-    model.load_state_dict(torch.load(checkpoint_path, map_location=device))
-
-    loss_fn = make_loss_fn(num_nodes=N, device=device)
-
-    rows = []
-
-    for threshold in THRESHOLDS:
-        _, metrics, _ = evaluate_model(
-            model=model,
-            loader=test_loader,
-            loss_fn=loss_fn,
-            device=device,
-            threshold=threshold,
-        )
-
-        rows.append(
-            {
-                "threshold": threshold,
-                "precision": metrics["precision"],
-                "recall": metrics["recall"],
-                "f1": metrics["f1"],
-            }
-        )
-
-    save_threshold_results(
-        path=OUT_PATH,
-        rows=rows,
-    )
-
-    print(f"Saved threshold analysis to: {OUT_PATH}")
-
-
-if __name__ == "__main__":
-    main()
+# def main() -> None:
+#     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#
+#     _, test_dataset = build_pyg_dataset(
+#         num_samples=TEST_GRAPHS,
+#         n=N,
+#         seed_offset=TEST_SEED_OFFSET,
+#     )
+#
+#     test_loader = DataLoader(
+#         test_dataset,
+#         batch_size=BATCH_SIZE,
+#         shuffle=False,
+#     )
+#
+#     model = EdgeGNN(hidden_dim=64).to(device)
+#
+#     checkpoint_path = Path(CHECKPOINT_PATH)
+#
+#     if not checkpoint_path.exists():
+#         raise FileNotFoundError(
+#             f"Checkpoint not found: {checkpoint_path}\n"
+#             "Run training first:\n"
+#             "python training/train_edge_classifier.py"
+#         )
+#
+#     model.load_state_dict(torch.load(checkpoint_path, map_location=device))
+#
+#     loss_fn = make_loss_fn(num_nodes=N, device=device)
+#
+#     rows = []
+#
+#     for threshold in THRESHOLDS:
+#         _, metrics, _ = evaluate_model(
+#             model=model,
+#             loader=test_loader,
+#             loss_fn=loss_fn,
+#             device=device,
+#             threshold=threshold,
+#         )
+#
+#         rows.append(
+#             {
+#                 "threshold": threshold,
+#                 "precision": metrics["precision"],
+#                 "recall": metrics["recall"],
+#                 "f1": metrics["f1"],
+#             }
+#         )
+#
+#     save_threshold_results(
+#         path=OUT_PATH,
+#         rows=rows,
+#     )
+#
+#     print(f"Saved threshold analysis to: {OUT_PATH}")
+#
+#
+# if __name__ == "__main__":
+#     main()
