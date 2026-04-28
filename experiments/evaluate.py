@@ -7,7 +7,7 @@ from typing import Callable
 import numpy as np
 
 # Allow running as:
-# python experiments/evaluate_baselines.py
+# python experiments/evaluate.py
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))

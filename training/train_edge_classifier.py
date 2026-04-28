@@ -33,8 +33,11 @@ EPOCHS = 20
 LR = 1e-3
 # THRESHOLD = 0.5
 THRESHOLDS = [i / 100 for i in range(5, 96, 5)]
-RESULTS_PATH = "experiments/results_n10.md"
-CHECKPOINT_PATH = "checkpoints/edge_gnn_n10_best.pt"
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+CHECKPOINT_PATH = PROJECT_ROOT / "checkpoints" / "edge_gnn_n10_best.pt"
+RESULTS_PATH = PROJECT_ROOT / "experiments" / "results_n10.md"
 
 
 def build_pyg_dataset(num_samples: int, n: int, seed_offset: int):

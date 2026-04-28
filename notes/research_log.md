@@ -273,3 +273,214 @@ This is the **correct minimal starting point**.
 The minimal EdgeGNN was trained on 1000 Euclidean TSP instances with n=10 and evaluated on 200 held-out test instances. The model predicts whether each directed edge belongs to the optimal tour.
 
 Compared with the n-shortest-edge baseline, EdgeGNN improves F1 from 0.620 to 0.703. This suggests that the model learns more than simple edge length: it captures some graph-level structure useful for identifying optimal tour edges.
+
+---
+
+# Analysis (goal) (Phase 3.5)
+
+## Goal
+
+The purpose is **not** to improve the model, but to understand:
+
+> why the model works and what it has learned.
+
+---
+
+## 1. Threshold Sensitivity Analysis
+
+### What to do
+
+* Evaluate model performance for thresholds in range `[0.1 … 0.9]`
+* For each threshold, compute:
+
+  * precision
+  * recall
+  * F1 score
+
+### Goal
+
+Understand the precision–recall trade-off:
+
+* low threshold → high recall, low precision
+* high threshold → high precision, low recall
+
+### Key takeaway
+
+The model behavior should follow a smooth trade-off curve.
+
+### What to write later
+
+> The model exhibits a clear precision–recall trade-off controlled by the classification threshold.
+
+---
+
+## 2. Compare Model vs Baseline Behavior
+
+### Known results
+
+* baseline F1 ≈ 0.62
+* model F1 ≈ 0.70
+
+### Main question
+
+> Where does the improvement come from?
+
+### What to do
+
+For a dataset, compute average edge distance for:
+
+* true optimal edges
+* shortest-edge baseline predictions
+* EdgeGNN predictions
+
+### Expected insight
+
+* baseline selects only shortest edges
+* model selects some longer edges when necessary
+
+### Interpretation
+
+This shows that the model goes beyond pure geometry.
+
+---
+
+## 3. Visualize Predictions (Critical)
+
+### What to do
+
+Select 2–3 graphs from test set and plot:
+
+* node positions
+* optimal tour edges (ground truth)
+* predicted edges (thresholded)
+
+### What to look for
+
+* baseline: disconnected or structurally incorrect edges
+* model: closer to true tour structure
+
+### Key takeaway
+
+> The model captures global structure, not just local distance.
+
+---
+
+## 4. Error Analysis
+
+### What to do
+
+For selected graphs:
+
+* compare ground truth vs predicted edges
+* identify:
+
+  * false positives
+  * false negatives
+
+### Typical patterns
+
+* missing long but necessary edges
+* confusion between symmetric alternatives
+
+### Interpretation
+
+These reveal limitations of the current model.
+
+---
+
+## 5. Class Imbalance Analysis
+
+### Current approach
+
+I used:
+
+```
+pos_weight = negative / positive
+```
+
+### What to test
+
+* train once without `pos_weight`
+* compare:
+
+  * recall
+  * precision
+  * F1
+
+### Expected result
+
+* recall decreases without weighting
+* imbalance harms learning
+
+### Conclusion
+
+> Handling class imbalance is necessary for this task.
+
+---
+
+## 6. Write Interpretation Section
+
+This is the main written output of this phase.
+
+Example structure:
+
+```
+## Analysis of EdgeGNN Predictions
+
+The EdgeGNN model significantly outperforms the shortest-edge baseline. While the baseline relies purely on geometric distance, the neural model captures additional structural patterns.
+
+In particular, the model is able to:
+- identify edges that are not among the shortest but are necessary for forming a valid tour
+- suppress short edges that would lead to suboptimal local structures
+
+This suggests that the model learns global graph structure through message passing.
+
+However, errors still occur in cases where multiple edges have similar geometric properties, indicating limitations in capturing long-range dependencies.
+```
+
+---
+
+## 7. (Optional) Distribution Analysis
+
+### What to do
+
+Plot histograms of distances for:
+
+* all edges
+* optimal edges
+* predicted edges
+
+### Goal
+
+Show that:
+
+> predicted edge distribution is closer to optimal than baseline.
+
+---
+
+## Final Insight
+
+By the end of this phase, I should clearly understand:
+
+> The model is NOT learning “distance”
+> It is learning **contextual edge importance**
+
+This is the central idea of my project.
+
+---
+
+## Completion Criteria
+
+Phase 3.5 is complete when I have:
+
+* threshold analysis
+* visualizations of predictions
+* comparison with baseline behavior
+* explanation of improvements
+* written interpretation
+
+---
+
+
+
+
