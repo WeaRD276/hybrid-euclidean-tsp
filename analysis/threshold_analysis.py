@@ -7,9 +7,9 @@ from pathlib import Path
 import torch
 from torch_geometric.loader import DataLoader
 
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+# ROOT = Path(__file__).resolve().parents[1]
+# if str(ROOT) not in sys.path:
+#     sys.path.insert(0, str(ROOT))
 
 from models.edge_gnn import EdgeGNN, make_loss_fn
 from training.train_edge_classifier import (
@@ -23,8 +23,8 @@ from training.train_edge_classifier import (
     evaluate_model,
 )
 
-
-OUT_PATH = "outputs/tables/thresholds_n10.csv"
+from config import OUTPUTS_DIR
+OUT_PATH = OUTPUTS_DIR / "tables/thresholds_n10.csv"
 
 
 def save_threshold_results(path: str | Path, rows) -> None:
