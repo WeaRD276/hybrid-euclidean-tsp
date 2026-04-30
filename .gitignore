@@ -33,3 +33,15 @@ outputs/
 papers/
 
 notes/
+
+.codex
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+wandb/
+lightning_logs/
