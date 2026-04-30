@@ -1,34 +1,28 @@
 from __future__ import annotations
 
 import csv
-import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
-# ROOT = Path(__file__).resolve().parents[1]
-# if str(ROOT) not in sys.path:
-#     sys.path.insert(0, str(ROOT))
-
-from data.dataset_generator import build_dataset
+from data.serialization import load_split_samples
 from heuristics.greedy_tour import greedy_tour, neural_guided_scores
 from models.edge_gnn import EdgeGNN
 from training.torch_dataset import to_pyg
 from training.train_edge_classifier import (
     N,
-    VAL_GRAPHS,
-    VAL_SEED_OFFSET,
     CHECKPOINT_PATH,
 )
+from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
 LAMBDA_VALUES = [0.0, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 5.0]
 
-from config import OUTPUTS_DIR
 CSV_PATH = OUTPUTS_DIR / "tours" / "lambda_sweep_n10.csv"
 PLOT_PATH = OUTPUTS_DIR / "tours" / "lambda_sweep_n10.png"
+VAL_DIR = SAVED_DATA_DIR / f"n_{N}" / "val"
 
 
 @torch.no_grad()
@@ -96,12 +90,15 @@ def main() -> None:
             "python training/train_edge_classifier.py"
         )
 
-    print("Building validation graphs...")
-    val_graphs = build_dataset(
-        num_samples=VAL_GRAPHS,
-        n=N,
-        seed_offset=VAL_SEED_OFFSET,
-    )
+    if not VAL_DIR.exists():
+        raise FileNotFoundError(
+            f"Saved validation split not found: {VAL_DIR}\n"
+            "Generate dataset first:\n"
+            "python data/dataset_generator.py"
+        )
+
+    print("Loading validation graphs from files...")
+    val_graphs = load_split_samples(VAL_DIR)
 
     print("Loading model...")
     model = EdgeGNN(hidden_dim=64).to(device)
@@ -163,3 +160,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    

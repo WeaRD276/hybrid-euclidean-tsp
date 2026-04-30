@@ -1,16 +1,11 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 import numpy as np
 import torch
 
-# ROOT = Path(__file__).resolve().parents[1]
-# if str(ROOT) not in sys.path:
-#     sys.path.insert(0, str(ROOT))
-
-from data.dataset_generator import build_dataset
+from data.serialization import load_split_samples
 from heuristics.greedy_tour import (
     greedy_tour,
     distance_scores,
@@ -20,16 +15,15 @@ from models.edge_gnn import EdgeGNN
 from training.torch_dataset import to_pyg
 from training.train_edge_classifier import (
     N,
-    TEST_GRAPHS,
-    TEST_SEED_OFFSET,
     CHECKPOINT_PATH,
 )
+from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-LAMBDA = 5
+LAMBDA = 5.0
 
-from config import OUTPUTS_DIR
 OUT_PATH = OUTPUTS_DIR / "tours" / "tour_results_n10.md"
+TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"
 
 
 @torch.no_grad()
@@ -78,12 +72,15 @@ def main() -> None:
             "python training/train_edge_classifier.py"
         )
 
-    print("Building test graphs...")
-    test_graphs = build_dataset(
-        num_samples=TEST_GRAPHS,
-        n=N,
-        seed_offset=TEST_SEED_OFFSET,
-    )
+    if not TEST_DIR.exists():
+        raise FileNotFoundError(
+            f"Saved test split not found: {TEST_DIR}\n"
+            "Generate dataset first:\n"
+            "python data/dataset_generator.py"
+        )
+
+    print("Loading test graphs from files...")
+    test_graphs = load_split_samples(TEST_DIR)
 
     print("Loading model...")
     model = EdgeGNN(hidden_dim=64).to(device)

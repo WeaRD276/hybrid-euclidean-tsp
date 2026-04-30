@@ -13,31 +13,27 @@ if str(ROOT) not in sys.path:
 
 from baselines.all_zeros import predict_all_zeros
 from baselines.shortest_edges import predict_shortest_edges_unconstrained
-from data.dataset_generator import build_dataset
+from data.serialization import load_split_samples
 from experiments.evaluate import compute_confusion, compute_metrics
 from models.edge_gnn import EdgeGNN, make_loss_fn
-from training.torch_dataset import to_pyg, build_pyg_dataset
+from training.torch_dataset import TSPPyGDataset
+from config import *
 
 
 N = 10
-TRAIN_GRAPHS = 1000
-VAL_GRAPHS = 200
-TEST_GRAPHS = 200
-
-TRAIN_SEED_OFFSET = 0
-VAL_SEED_OFFSET = 10000
-TEST_SEED_OFFSET = 20000
 
 BATCH_SIZE = 32
 EPOCHS = 20
 LR = 1e-3
-# THRESHOLD = 0.5
 THRESHOLDS = [i / 100 for i in range(5, 96, 5)]
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+CHECKPOINT_PATH = OUTPUTS_DIR / "checkpoints" / "edge_gnn_n10_best.pt"
+RESULTS_PATH = OUTPUTS_DIR / "reports" / "results_n10.md"
 
-CHECKPOINT_PATH = PROJECT_ROOT / "outputs/checkpoints/edge_gnn_n10_best.pt"
-RESULTS_PATH = PROJECT_ROOT / "outputs/reports/results_n10.md"
+TRAIN_DIR = SAVED_DATA_DIR / f"n_{N}" / "train"
+VAL_DIR = SAVED_DATA_DIR / f"n_{N}" / "val"
+TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"
+
 
 def train_one_epoch(model, loader, optimizer, loss_fn, device):
     model.train()
@@ -89,6 +85,7 @@ def evaluate_model(model, loader, loss_fn, device, threshold: float = 0.5):
         total_edges += num_edges
 
     return total_loss / total_edges, compute_metrics(total_conf), total_conf
+
 
 @torch.no_grad()
 def find_best_threshold(model, loader, loss_fn, device):
@@ -162,7 +159,7 @@ def save_results_markdown(
     path.parent.mkdir(parents=True, exist_ok=True)
 
     lines = []
-    lines.append("# Results for n = 10")
+    lines.append(f"# Results for n = {N}")
     lines.append("")
     lines.append(f"- Best epoch: {best_epoch}")
     lines.append(f"- Best validation F1 during training at threshold 0.5: {best_val_f1:.6f}")
@@ -183,6 +180,7 @@ def save_results_markdown(
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
+
 def main():
     torch.manual_seed(47)
     np.random.seed(47)
@@ -191,10 +189,22 @@ def main():
     print(f"Device: {device}")
     print()
 
-    print("Building datasets...")
-    train_raw, train_dataset = build_pyg_dataset(TRAIN_GRAPHS, N, TRAIN_SEED_OFFSET)
-    val_raw, val_dataset = build_pyg_dataset(VAL_GRAPHS, N, VAL_SEED_OFFSET)
-    test_raw, test_dataset = build_pyg_dataset(TEST_GRAPHS, N, TEST_SEED_OFFSET)
+    if not TRAIN_DIR.exists() or not VAL_DIR.exists() or not TEST_DIR.exists():
+        raise FileNotFoundError(
+            "Saved dataset splits were not found.\n"
+            f"Expected:\n{TRAIN_DIR}\n{VAL_DIR}\n{TEST_DIR}\n"
+            "Generate dataset first:\n"
+            "python data/dataset_generator.py"
+        )
+
+    print("Loading datasets from files...")
+    train_dataset = TSPPyGDataset(TRAIN_DIR)
+    val_dataset = TSPPyGDataset(VAL_DIR)
+    test_dataset = TSPPyGDataset(TEST_DIR)
+
+    # raw datasets only for baseline evaluation
+    val_raw = load_split_samples(VAL_DIR)
+    test_raw = load_split_samples(TEST_DIR)
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)

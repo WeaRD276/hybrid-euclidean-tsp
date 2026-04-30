@@ -1,40 +1,36 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 
 import numpy as np
 import torch
 from torch_geometric.loader import DataLoader
 
-ROOT = Path(__file__).resolve().parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
 from analysis.distance_analysis import run_distance_analysis
 from analysis.threshold_analysis import save_threshold_results
 from analysis.visualization import save_graph_visualizations
 from baselines.shortest_edges import predict_shortest_edges_unconstrained
+from data.serialization import load_split_samples
 from models.edge_gnn import EdgeGNN, make_loss_fn
+from training.torch_dataset import TSPPyGDataset, to_pyg
 from training.train_edge_classifier import (
     N,
     BATCH_SIZE,
     CHECKPOINT_PATH,
-    TEST_GRAPHS,
-    TEST_SEED_OFFSET,
     THRESHOLDS,
-    build_pyg_dataset,
     evaluate_model,
 )
-from training.torch_dataset import to_pyg
+from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-THRESHOLD_OUT = ROOT / "outputs" / "tables" / "thresholds_n10.csv"
-DISTANCE_OUT = ROOT / "outputs" / "reports" / "distance_analysis_n10.md"
-PLOTS_OUT = ROOT / "outputs" / "plots" / "graphs"
+THRESHOLD_OUT = OUTPUTS_DIR / "tables" / "thresholds_n10.csv"
+DISTANCE_OUT = OUTPUTS_DIR / "reports" / "distance_analysis_n10.md"
+PLOTS_OUT = OUTPUTS_DIR / "plots" / "graphs"
 
 BEST_THRESHOLD = 0.60
 NUM_VISUALIZATIONS = 3
+
+TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"
 
 
 @torch.no_grad()
@@ -59,12 +55,16 @@ def main() -> None:
             "python training/train_edge_classifier.py"
         )
 
-    print("Building test dataset...")
-    test_raw, test_dataset = build_pyg_dataset(
-        num_samples=TEST_GRAPHS,
-        n=N,
-        seed_offset=TEST_SEED_OFFSET,
-    )
+    if not TEST_DIR.exists():
+        raise FileNotFoundError(
+            f"Saved test split not found: {TEST_DIR}\n"
+            "Generate dataset first:\n"
+            "python data/dataset_generator.py"
+        )
+
+    print("Loading test dataset from files...")
+    test_raw = load_split_samples(TEST_DIR)
+    test_dataset = TSPPyGDataset(TEST_DIR)
 
     test_loader = DataLoader(
         test_dataset,
@@ -128,7 +128,7 @@ def main() -> None:
     )
 
     print("Saving visualizations...")
-    for graph_id in range(NUM_VISUALIZATIONS):
+    for graph_id in range(min(NUM_VISUALIZATIONS, len(test_raw))):
         save_graph_visualizations(
             graph=test_raw[graph_id],
             pred_mask=model_predictions[graph_id],

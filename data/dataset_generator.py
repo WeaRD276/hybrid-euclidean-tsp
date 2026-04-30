@@ -1,10 +1,11 @@
 from pathlib import Path
-
-import torch_geometric
+import json
 
 from data.generator import gen_points
 from data.graph_builder import TSPGraphData
 from data.serialization import save_sample
+from config import *
+
 
 def build_dataset(num_samples: int, n: int, seed_offset: int = 0):
     res = []
@@ -13,21 +14,45 @@ def build_dataset(num_samples: int, n: int, seed_offset: int = 0):
         res.append(TSPGraphData.from_points(points))
     return res
 
+
+def save_metadata(
+    n: int,
+    train_samples: int,
+    val_samples: int,
+    test_samples: int,
+    train_seed_offset: int,
+    val_seed_offset: int,
+    test_seed_offset: int,
+) -> None:
+    base_dir = SAVED_DATA_DIR / f"n_{n}"
+    base_dir.mkdir(parents=True, exist_ok=True)
+
+    metadata = {
+        "n": n,
+        "train_samples": train_samples,
+        "val_samples": val_samples,
+        "test_samples": test_samples,
+        "train_seed_offset": train_seed_offset,
+        "val_seed_offset": val_seed_offset,
+        "test_seed_offset": test_seed_offset,
+        "node_features": ["x", "y"],
+        "edge_features": ["dx", "dy", "dist"],
+        "label": "edge_in_optimal_tour",
+    }
+
+    metadata_path = base_dir / "meta.json"
+    with open(metadata_path, "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=2)
+
+
 def generate_split(
     out_dir: str,
     num_samples: int,
     n: int,
     seed_offset: int = 0,
 ) -> None:
-    out_path = Path(out_dir)
+    out_path = SAVED_DATA_DIR / f"n_{n}" / out_dir
     out_path.mkdir(parents=True, exist_ok=True)
-
-    # dataset = build_dataset(num_samples=num_samples, n=n, seed_offset=seed_offset)
-    # for i in range(num_samples):
-    #     sample = dataset[i]
-    #
-    #     file_path = out_path / f"sample_{i:06d}.pkl"
-    #     save_sample(sample, file_path)
 
     for i in range(num_samples):
         points = gen_points(seed_offset + i, n)
@@ -38,22 +63,33 @@ def generate_split(
 
 
 def generate_all_splits() -> None:
-    generate_split("outputs/datasets/train", num_samples=1000, n=10, seed_offset=0)
-    generate_split("outputs/datasets/val", num_samples=200, n=10, seed_offset=10000)
-    generate_split("outputs/datasets/test", num_samples=200, n=10, seed_offset=20000)
+    train_samples = 1000
+    val_samples = 200
+    test_samples = 200
+
+    train_seed_offset = 0
+    val_seed_offset = 10000
+    test_seed_offset = 20000
+
+    n = 10
+
+    generate_split("train", num_samples=train_samples, n=n, seed_offset=train_seed_offset)
+    generate_split("val", num_samples=val_samples, n=n, seed_offset=val_seed_offset)
+    generate_split("test", num_samples=test_samples, n=n, seed_offset=test_seed_offset)
+
+    save_metadata(
+        n=n,
+        train_samples=train_samples,
+        val_samples=val_samples,
+        test_samples=test_samples,
+        train_seed_offset=train_seed_offset,
+        val_seed_offset=val_seed_offset,
+        test_seed_offset=test_seed_offset,
+    )
 
 
 def main():
     generate_all_splits()
-
-    # train_data = build_dataset(num_samples=1000, n=10)
-    # val_data = build_dataset(num_samples=200, n=10, seed_offset=10000)
-    # sample = train_data[0]
-    # print(sample.x.shape)
-    # print(sample.edge_index.shape)
-    # print(sample.edge_attr.shape)
-    # print(sample.y.shape)
-    # print(sample.y.mean())
 
 
 if __name__ == "__main__":
