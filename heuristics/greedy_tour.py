@@ -63,10 +63,11 @@ def _get_undirected_edges(graph, edge_scores: np.ndarray) -> list[tuple[float, f
         u = int(edge_index[0, k])
         v = int(edge_index[1, k])
 
-        score = float(edge_scores[k])
-        distance = float(distances[k])
+        if u < v:
+            score = float(edge_scores[k])
+            distance = float(distances[k])
 
-        edges.append((score, distance, u, v))
+            edges.append((score, distance, u, v))
 
     return edges
 
