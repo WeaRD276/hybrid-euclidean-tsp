@@ -4,7 +4,7 @@ import json
 from data.generator import gen_points
 from data.graph_builder import TSPGraphData
 from data.serialization import save_sample
-from config import *
+from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
 def build_dataset(num_samples: int, n: int, seed_offset: int = 0):
@@ -62,7 +62,7 @@ def generate_split(
         save_sample(sample, file_path)
 
 
-def generate_all_splits() -> None:
+def generate_all_splits(n) -> None:
     train_samples = 1000
     val_samples = 200
     test_samples = 200
@@ -70,8 +70,6 @@ def generate_all_splits() -> None:
     train_seed_offset = 0
     val_seed_offset = 10000
     test_seed_offset = 20000
-
-    n = 10
 
     generate_split("train", num_samples=train_samples, n=n, seed_offset=train_seed_offset)
     generate_split("val", num_samples=val_samples, n=n, seed_offset=val_seed_offset)
@@ -89,7 +87,8 @@ def generate_all_splits() -> None:
 
 
 def main():
-    generate_all_splits()
+    n = 10
+    generate_all_splits(n)
 
 
 if __name__ == "__main__":

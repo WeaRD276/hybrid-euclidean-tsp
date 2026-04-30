@@ -17,7 +17,7 @@ from data.serialization import load_split_samples
 from experiments.evaluate import compute_confusion, compute_metrics
 from models.edge_gnn import EdgeGNN, make_loss_fn
 from training.torch_dataset import TSPPyGDataset
-from config import *
+from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
 N = 10
