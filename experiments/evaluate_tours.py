@@ -48,7 +48,7 @@ def save_results(path: str | Path, rows: list[tuple[str, float]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
 
     lines = []
-    lines.append("# Tour Construction Results for n = 10")
+    lines.append(f"# Tour Construction Results for n = {N}")
     lines.append("")
     lines.append(f"- Selected lambda: {LAMBDA}")
     lines.append("")
