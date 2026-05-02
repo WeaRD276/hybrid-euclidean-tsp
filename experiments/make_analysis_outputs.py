@@ -23,11 +23,11 @@ from training.train_edge_classifier import (
 from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-THRESHOLD_OUT = OUTPUTS_DIR / "tables" / "thresholds_n10.csv"
-DISTANCE_OUT = OUTPUTS_DIR / "reports" / "distance_analysis_n10.md"
-PLOTS_OUT = OUTPUTS_DIR / "plots" / "graphs"
+THRESHOLD_OUT = OUTPUTS_DIR / "tables" / f"thresholds_n{N}.csv"
+DISTANCE_OUT = OUTPUTS_DIR / "reports" / f"distance_analysis_n{N}.md"
+PLOTS_OUT = OUTPUTS_DIR / "plots" / f"graphs_n{N}"
 
-BEST_THRESHOLD = 0.60
+BEST_THRESHOLD = 0.55
 NUM_VISUALIZATIONS = 3
 
 TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"

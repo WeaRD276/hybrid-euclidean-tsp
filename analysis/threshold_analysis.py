@@ -19,7 +19,7 @@ from training.train_edge_classifier import (
 from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-OUT_PATH = OUTPUTS_DIR / "tables" / "thresholds_n10.csv"
+OUT_PATH = OUTPUTS_DIR / "tables" / f"thresholds_n{N}.csv"
 TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"
 
 

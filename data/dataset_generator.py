@@ -63,9 +63,9 @@ def generate_split(
 
 
 def generate_all_splits(n) -> None:
-    train_samples = 1000
-    val_samples = 200
-    test_samples = 200
+    train_samples = 500
+    val_samples = 100
+    test_samples = 100
 
     train_seed_offset = 0
     val_seed_offset = 10000
@@ -87,7 +87,7 @@ def generate_all_splits(n) -> None:
 
 
 def main():
-    n = 10
+    n = 20
     generate_all_splits(n)
 
 

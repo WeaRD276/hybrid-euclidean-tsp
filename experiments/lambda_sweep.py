@@ -20,8 +20,8 @@ from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 LAMBDA_VALUES = [0.0, 0.05, 0.1, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 5.0]
 
-CSV_PATH = OUTPUTS_DIR / "tours" / "lambda_sweep_n10.csv"
-PLOT_PATH = OUTPUTS_DIR / "tours" / "lambda_sweep_n10.png"
+CSV_PATH = OUTPUTS_DIR / "tours" / f"lambda_sweep_n{N}.csv"
+PLOT_PATH = OUTPUTS_DIR / "tours" / f"lambda_sweep_n{N}.png"
 VAL_DIR = SAVED_DATA_DIR / f"n_{N}" / "val"
 
 

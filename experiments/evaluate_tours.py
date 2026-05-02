@@ -20,9 +20,9 @@ from training.train_edge_classifier import (
 from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-LAMBDA = 5.0
+LAMBDA = 0
 
-OUT_PATH = OUTPUTS_DIR / "tours" / "tour_results_n10.md"
+OUT_PATH = OUTPUTS_DIR / "tours" / f"tour_results_n{N}.md"
 TEST_DIR = SAVED_DATA_DIR / f"n_{N}" / "test"
 
 

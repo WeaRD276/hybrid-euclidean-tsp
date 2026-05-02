@@ -20,15 +20,15 @@ from training.torch_dataset import TSPPyGDataset
 from config import OUTPUTS_DIR, SAVED_DATA_DIR
 
 
-N = 10
+N = 20
 
 BATCH_SIZE = 32
 EPOCHS = 20
 LR = 1e-3
 THRESHOLDS = [i / 100 for i in range(5, 96, 5)]
 
-CHECKPOINT_PATH = OUTPUTS_DIR / "checkpoints" / "edge_gnn_n10_best.pt"
-RESULTS_PATH = OUTPUTS_DIR / "reports" / "results_n10.md"
+CHECKPOINT_PATH = OUTPUTS_DIR / "checkpoints" / f"edge_gnn_n{N}_best.pt"
+RESULTS_PATH = OUTPUTS_DIR / "reports" / f"results_n{N}.md"
 
 TRAIN_DIR = SAVED_DATA_DIR / f"n_{N}" / "train"
 VAL_DIR = SAVED_DATA_DIR / f"n_{N}" / "val"
