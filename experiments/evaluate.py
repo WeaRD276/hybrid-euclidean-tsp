@@ -21,6 +21,7 @@ def compute_confusion(y_true: np.ndarray, y_pred: np.ndarray) -> dict[str, int]:
     y_true = y_true.astype(np.int32)
     y_pred = y_pred.astype(np.int32)
 
+
     tp = int(np.sum((y_true == 1) & (y_pred == 1)))
     tn = int(np.sum((y_true == 0) & (y_pred == 0)))
     fp = int(np.sum((y_true == 0) & (y_pred == 1)))
