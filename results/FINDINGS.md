@@ -72,3 +72,59 @@ tuned λ for every other run. The weighted sum d − λ·p adds little over rank
 matters for the hybridization study (WP5). The best raw and normalised score modes are within
 0.35 points of each other on every heatmap (median 0.03), so the scale mismatch between d and p was not a
 problem at these sizes.
+
+# Scaling to n = 50 and n = 100
+
+Same setup (10,000 / 1,000 / 1,000 instances, 30 epochs, 3 seeds). At n = 50 GraphConv is
+trained on the complete graph and on a kNN graph with k = 10; at n = 100 only on kNN (k = 10),
+because the complete graph has 9,900 directed edges per instance. Tables: `n_50/results.md`,
+`n_100/results.md`.
+
+## 7. The neural gain shrinks with n, and so does its lead over non-learned heatmaps
+
+Mean test gap % over LKH. "GraphConv" is the better graph type at each size
+(complete at n ≤ 20, kNN k = 10 at n ≥ 50), mean of 3 seeds.
+
+| method | n = 10 | n = 20 | n = 50 | n = 100 |
+| --- | ---: | ---: | ---: | ---: |
+| greedy edge | 8.06 | 12.66 | 17.02 | 18.03 |
+| greedy + SoftDist (no learning) | 5.59 | 9.67 | 14.09 | 16.01 |
+| greedy + GraphConv | 1.74 | 6.68 | 12.72 | 14.83 |
+| farthest insertion | 0.67 | 2.51 | 5.76 | 7.50 |
+| greedy edge + 2-opt | 0.28 | 1.22 | 2.92 | 3.53 |
+| greedy + SoftDist + 2-opt | 0.19 | 0.89 | 2.37 | 2.99 |
+| greedy + GraphConv + 2-opt | 0.17 | 0.81 | 2.31 | 2.88 |
+
+Share of the greedy gap removed by the heatmap:
+
+| heatmap | n = 10 | n = 20 | n = 50 | n = 100 |
+| --- | ---: | ---: | ---: | ---: |
+| SoftDist | 31% | 24% | 17% | 11% |
+| GraphConv | 78% | 47% | 25% | 18% |
+
+This is the curve the thesis has to explain. The neural heatmap still helps greedy at n = 100
+(about 620 wins against 380 losses per 1,000 instances after 2-opt, p < 1e-4 against
+greedy + 2-opt), but its margin over SoftDist + 2-opt is only about 0.1 points from n = 20 on.
+That margin has not yet been tested for significance.
+
+## 8. At n = 50 the complete-graph model collapses again; the kNN model does not (H1)
+
+| n = 50, GraphConv | AP | greedy gap % | + 2-opt gap % | train time |
+| --- | ---: | ---: | ---: | ---: |
+| distance only | 0.655 | 17.02 | 2.92 | |
+| complete graph | 0.66 | 13.53 ± 2.44 | 2.45 ± 0.29 | ~33 min |
+| kNN, k = 10 | 0.76 | 12.72 ± 0.18 | 2.31 ± 0.03 | ~6 min |
+
+With the same budget, the complete-graph model is back at "distance only" on edge metrics
+and is unstable across seeds, while the kNN model trains well and is five times cheaper.
+So the complete graph does matter once n grows, even though it did not at n = 20
+(finding 4). It is not yet clear whether this is the sum-aggregation effect or just a
+larger budget being needed again (finding 1). A longer complete-graph run at n = 50 would
+separate the two.
+
+## 9. Edge metrics rank the heatmaps differently from tour quality (RQ3)
+
+At n = 50 and n = 100 the kNN-rank heatmap has a higher AP than GraphConv (0.79 vs 0.76 and
+0.80 vs 0.74), yet GraphConv gives clearly shorter greedy tours (12.72% vs 14.88% and
+14.83% vs 16.12%). Together with finding 4, this is direct evidence that a better edge
+classifier is not automatically a better guide for greedy.

@@ -26,11 +26,12 @@ from data.solvers import distance_matrix
 from experiments.metrics import average_precision, edge_scores_and_labels
 from heuristics.scores import prob_matrix
 from models.edge_gnn import EdgeGNN
-from models.gat_edge_gnn import GATEdgeGNN
+from models.gat_edge_gnn import GATEdgeGNN, GATv2EdgeGNN
 
 MODELS = {
     "graphconv": EdgeGNN,
     "gat": GATEdgeGNN,
+    "gatv2e": GATv2EdgeGNN,
 }
 
 RUNS_DIR = OUTPUTS_DIR / "runs"

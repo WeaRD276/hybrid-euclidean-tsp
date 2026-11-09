@@ -3,7 +3,7 @@ from __future__ import annotations
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import GATConv
+from torch_geometric.nn import GATConv, GATv2Conv
 
 
 class GATEdgeGNN(nn.Module):
@@ -71,3 +71,49 @@ class GATEdgeGNN(nn.Module):
 
         logits = self.edge_mlp(edge_features).squeeze(-1)
         return logits
+
+
+class GATv2EdgeGNN(nn.Module):
+    """
+    GATv2 edge classifier that also feeds the edge features [dx, dy, dist]
+    into the attention scores (edge_dim), unlike GATEdgeGNN.
+    """
+
+    def __init__(
+        self,
+        node_in_dim: int = 2,
+        edge_in_dim: int = 3,
+        hidden_dim: int = 64,
+        heads: int = 4,
+        dropout: float = 0.0,
+    ):
+        super().__init__()
+
+        self.node_encoder = nn.Sequential(
+            nn.Linear(node_in_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+        )
+
+        self.gat1 = GATv2Conv(hidden_dim, hidden_dim, heads=heads, concat=False,
+                              dropout=dropout, edge_dim=edge_in_dim)
+        self.gat2 = GATv2Conv(hidden_dim, hidden_dim, heads=heads, concat=False,
+                              dropout=dropout, edge_dim=edge_in_dim)
+
+        self.edge_mlp = nn.Sequential(
+            nn.Linear(2 * hidden_dim + edge_in_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, 1),
+        )
+
+    def forward(self, data) -> torch.Tensor:
+        edge_index = data.edge_index
+        edge_attr = data.edge_attr
+
+        h = self.node_encoder(data.x)
+        h = F.relu(self.gat1(h, edge_index, edge_attr))
+        h = F.relu(self.gat2(h, edge_index, edge_attr))
+
+        edge_features = torch.cat([h[edge_index[0]], h[edge_index[1]], edge_attr], dim=-1)
+        return self.edge_mlp(edge_features).squeeze(-1)
