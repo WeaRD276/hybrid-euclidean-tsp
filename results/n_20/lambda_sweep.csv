@@ -1,0 +1,521 @@
+heatmap,mode,lambda,val_gap_pct
+kNN rank (no learning),raw,0.0,12.67137705547786
+kNN rank (no learning),raw,0.01,12.651628314547022
+kNN rank (no learning),raw,0.02,12.648894155927414
+kNN rank (no learning),raw,0.05,12.38764086756855
+kNN rank (no learning),raw,0.1,12.130550649999753
+kNN rank (no learning),raw,0.25,11.757419219268678
+kNN rank (no learning),raw,0.5,11.208351979444327
+kNN rank (no learning),raw,0.75,11.22362608371689
+kNN rank (no learning),raw,1.0,11.076066967210915
+kNN rank (no learning),raw,1.5,10.917352279113075
+kNN rank (no learning),raw,2.0,10.80561203047436
+kNN rank (no learning),raw,5.0,10.71387375472422
+kNN rank (no learning),raw,10.0,10.704614015220516
+kNN rank (no learning),raw,50.0,10.623455498378421
+kNN rank (no learning),raw,1000.0,10.583651301655195
+kNN rank (no learning),norm,0.0,12.67137705547786
+kNN rank (no learning),norm,0.1,12.671034397538637
+kNN rank (no learning),norm,0.25,12.542033908385678
+kNN rank (no learning),norm,0.5,12.2376547602538
+kNN rank (no learning),norm,1.0,12.039634115854952
+kNN rank (no learning),norm,2.0,11.706655853351124
+kNN rank (no learning),norm,4.0,11.28936472635077
+kNN rank (no learning),norm,8.0,11.160703243506603
+kNN rank (no learning),norm,16.0,10.803581831214208
+kNN rank (no learning),norm,32.0,10.738785357052725
+kNN rank (no learning),norm,128.0,10.666706830497075
+SoftDist (no learning),raw,0.0,12.67137705547786
+SoftDist (no learning),raw,0.01,12.627677620383993
+SoftDist (no learning),raw,0.02,12.594263570536238
+SoftDist (no learning),raw,0.05,12.460833705439324
+SoftDist (no learning),raw,0.1,12.30295949554643
+SoftDist (no learning),raw,0.25,12.0261709524783
+SoftDist (no learning),raw,0.5,11.648542459292312
+SoftDist (no learning),raw,0.75,11.456729871371987
+SoftDist (no learning),raw,1.0,11.189759951936827
+SoftDist (no learning),raw,1.5,10.797114227794555
+SoftDist (no learning),raw,2.0,10.514542181099209
+SoftDist (no learning),raw,5.0,9.994969531153714
+SoftDist (no learning),raw,10.0,9.658766323243597
+SoftDist (no learning),raw,50.0,9.270817228228
+SoftDist (no learning),raw,1000.0,9.237518450987558
+SoftDist (no learning),norm,0.0,12.67137705547786
+SoftDist (no learning),norm,0.1,12.624341664395994
+SoftDist (no learning),norm,0.25,12.598406834110666
+SoftDist (no learning),norm,0.5,12.423502069673289
+SoftDist (no learning),norm,1.0,12.286217561737907
+SoftDist (no learning),norm,2.0,12.043385450770831
+SoftDist (no learning),norm,4.0,11.666127958454249
+SoftDist (no learning),norm,8.0,11.238013224694559
+SoftDist (no learning),norm,16.0,10.47986964689591
+SoftDist (no learning),norm,32.0,10.071831292369472
+SoftDist (no learning),norm,128.0,9.562926058111934
+n20_gat_complete_h64_s0,raw,0.0,12.67137705547786
+n20_gat_complete_h64_s0,raw,0.01,12.657846391446052
+n20_gat_complete_h64_s0,raw,0.02,12.653716191160798
+n20_gat_complete_h64_s0,raw,0.05,12.639831770459827
+n20_gat_complete_h64_s0,raw,0.1,12.60194914089663
+n20_gat_complete_h64_s0,raw,0.25,12.491303576159233
+n20_gat_complete_h64_s0,raw,0.5,12.534043255405106
+n20_gat_complete_h64_s0,raw,0.75,12.637830669442302
+n20_gat_complete_h64_s0,raw,1.0,12.566336832675795
+n20_gat_complete_h64_s0,raw,1.5,12.59907587793632
+n20_gat_complete_h64_s0,raw,2.0,12.536548331891357
+n20_gat_complete_h64_s0,raw,5.0,12.392900314213191
+n20_gat_complete_h64_s0,raw,10.0,12.397306232461174
+n20_gat_complete_h64_s0,raw,50.0,12.369573138036598
+n20_gat_complete_h64_s0,raw,1000.0,12.35939911398403
+n20_gat_complete_h64_s0,norm,0.0,12.67137705547786
+n20_gat_complete_h64_s0,norm,0.1,12.662381999400376
+n20_gat_complete_h64_s0,norm,0.25,12.62178468516237
+n20_gat_complete_h64_s0,norm,0.5,12.636985708391052
+n20_gat_complete_h64_s0,norm,1.0,12.57717456341418
+n20_gat_complete_h64_s0,norm,2.0,12.45997488208802
+n20_gat_complete_h64_s0,norm,4.0,12.654401192134404
+n20_gat_complete_h64_s0,norm,8.0,12.581344322600723
+n20_gat_complete_h64_s0,norm,16.0,12.526038081433548
+n20_gat_complete_h64_s0,norm,32.0,12.439279443193588
+n20_gat_complete_h64_s0,norm,128.0,12.366914676255218
+n20_gat_complete_h64_s1,raw,0.0,12.67137705547786
+n20_gat_complete_h64_s1,raw,0.01,12.610924367577017
+n20_gat_complete_h64_s1,raw,0.02,12.59934287026666
+n20_gat_complete_h64_s1,raw,0.05,12.614862841689453
+n20_gat_complete_h64_s1,raw,0.1,12.56925090264825
+n20_gat_complete_h64_s1,raw,0.25,12.49605223768251
+n20_gat_complete_h64_s1,raw,0.5,12.527009191440191
+n20_gat_complete_h64_s1,raw,0.75,12.515230890524812
+n20_gat_complete_h64_s1,raw,1.0,12.449212056884914
+n20_gat_complete_h64_s1,raw,1.5,12.477609738255289
+n20_gat_complete_h64_s1,raw,2.0,12.458224122575078
+n20_gat_complete_h64_s1,raw,5.0,12.474248081413084
+n20_gat_complete_h64_s1,raw,10.0,12.463629016935924
+n20_gat_complete_h64_s1,raw,50.0,12.54756623819943
+n20_gat_complete_h64_s1,raw,1000.0,12.546562802515353
+n20_gat_complete_h64_s1,norm,0.0,12.67137705547786
+n20_gat_complete_h64_s1,norm,0.1,12.606957655768571
+n20_gat_complete_h64_s1,norm,0.25,12.614375877404592
+n20_gat_complete_h64_s1,norm,0.5,12.612993742157869
+n20_gat_complete_h64_s1,norm,1.0,12.58200854823835
+n20_gat_complete_h64_s1,norm,2.0,12.486848827712425
+n20_gat_complete_h64_s1,norm,4.0,12.529690430548195
+n20_gat_complete_h64_s1,norm,8.0,12.427751839236045
+n20_gat_complete_h64_s1,norm,16.0,12.466004151055392
+n20_gat_complete_h64_s1,norm,32.0,12.480133358119438
+n20_gat_complete_h64_s1,norm,128.0,12.502918542589352
+n20_gat_complete_h64_s2,raw,0.0,12.67137705547786
+n20_gat_complete_h64_s2,raw,0.01,12.629058704844986
+n20_gat_complete_h64_s2,raw,0.02,12.624929161161973
+n20_gat_complete_h64_s2,raw,0.05,12.632648547804761
+n20_gat_complete_h64_s2,raw,0.1,12.596920863091444
+n20_gat_complete_h64_s2,raw,0.25,12.456674434141997
+n20_gat_complete_h64_s2,raw,0.5,12.509764772300215
+n20_gat_complete_h64_s2,raw,0.75,12.50995032452314
+n20_gat_complete_h64_s2,raw,1.0,12.535212958339564
+n20_gat_complete_h64_s2,raw,1.5,12.530588098568176
+n20_gat_complete_h64_s2,raw,2.0,12.48456839623156
+n20_gat_complete_h64_s2,raw,5.0,12.47265709064764
+n20_gat_complete_h64_s2,raw,10.0,12.476320136816058
+n20_gat_complete_h64_s2,raw,50.0,12.416149403566505
+n20_gat_complete_h64_s2,raw,1000.0,12.422742358718983
+n20_gat_complete_h64_s2,norm,0.0,12.67137705547786
+n20_gat_complete_h64_s2,norm,0.1,12.64083796753568
+n20_gat_complete_h64_s2,norm,0.25,12.619124036032616
+n20_gat_complete_h64_s2,norm,0.5,12.605243720644593
+n20_gat_complete_h64_s2,norm,1.0,12.590221171519655
+n20_gat_complete_h64_s2,norm,2.0,12.455099756776542
+n20_gat_complete_h64_s2,norm,4.0,12.57389218517568
+n20_gat_complete_h64_s2,norm,8.0,12.556896179076606
+n20_gat_complete_h64_s2,norm,16.0,12.522716497191123
+n20_gat_complete_h64_s2,norm,32.0,12.477082391014397
+n20_gat_complete_h64_s2,norm,128.0,12.45622802033845
+n20_graphconv_complete_h64_s0,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_s0,raw,0.01,12.507641437339968
+n20_graphconv_complete_h64_s0,raw,0.02,12.197556566869261
+n20_graphconv_complete_h64_s0,raw,0.05,11.48675998807771
+n20_graphconv_complete_h64_s0,raw,0.1,10.88503998309676
+n20_graphconv_complete_h64_s0,raw,0.25,9.155401546775169
+n20_graphconv_complete_h64_s0,raw,0.5,8.08782190035378
+n20_graphconv_complete_h64_s0,raw,0.75,7.534518099809056
+n20_graphconv_complete_h64_s0,raw,1.0,7.351545824259019
+n20_graphconv_complete_h64_s0,raw,1.5,6.949402706455288
+n20_graphconv_complete_h64_s0,raw,2.0,6.63790724295552
+n20_graphconv_complete_h64_s0,raw,5.0,6.5561853869663
+n20_graphconv_complete_h64_s0,raw,10.0,6.335679048113596
+n20_graphconv_complete_h64_s0,raw,50.0,6.175327622729401
+n20_graphconv_complete_h64_s0,raw,1000.0,6.116305150445005
+n20_graphconv_complete_h64_s0,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_s0,norm,0.1,12.454431752422845
+n20_graphconv_complete_h64_s0,norm,0.25,11.895378870412344
+n20_graphconv_complete_h64_s0,norm,0.5,11.2190748275277
+n20_graphconv_complete_h64_s0,norm,1.0,10.507656821991171
+n20_graphconv_complete_h64_s0,norm,2.0,9.230168099393431
+n20_graphconv_complete_h64_s0,norm,4.0,8.061576416992688
+n20_graphconv_complete_h64_s0,norm,8.0,7.380160375912147
+n20_graphconv_complete_h64_s0,norm,16.0,6.67517899618544
+n20_graphconv_complete_h64_s0,norm,32.0,6.609513728381671
+n20_graphconv_complete_h64_s0,norm,128.0,6.265381828872049
+n20_graphconv_complete_h64_s1,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_s1,raw,0.01,12.487146829502356
+n20_graphconv_complete_h64_s1,raw,0.02,12.28464343615338
+n20_graphconv_complete_h64_s1,raw,0.05,11.633338808311281
+n20_graphconv_complete_h64_s1,raw,0.1,11.098888012586984
+n20_graphconv_complete_h64_s1,raw,0.25,9.685140008398488
+n20_graphconv_complete_h64_s1,raw,0.5,8.257547257686385
+n20_graphconv_complete_h64_s1,raw,0.75,7.77674771548136
+n20_graphconv_complete_h64_s1,raw,1.0,7.6157794656700535
+n20_graphconv_complete_h64_s1,raw,1.5,7.32729424892006
+n20_graphconv_complete_h64_s1,raw,2.0,7.206646720210267
+n20_graphconv_complete_h64_s1,raw,5.0,7.065537804274192
+n20_graphconv_complete_h64_s1,raw,10.0,7.020276808751854
+n20_graphconv_complete_h64_s1,raw,50.0,7.00906250203976
+n20_graphconv_complete_h64_s1,raw,1000.0,6.977600907562104
+n20_graphconv_complete_h64_s1,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_s1,norm,0.1,12.466916698651378
+n20_graphconv_complete_h64_s1,norm,0.25,12.03900143373171
+n20_graphconv_complete_h64_s1,norm,0.5,11.508523587444943
+n20_graphconv_complete_h64_s1,norm,1.0,10.77054947944781
+n20_graphconv_complete_h64_s1,norm,2.0,9.541186400182063
+n20_graphconv_complete_h64_s1,norm,4.0,8.302164520725755
+n20_graphconv_complete_h64_s1,norm,8.0,7.605698401401725
+n20_graphconv_complete_h64_s1,norm,16.0,7.206041811999639
+n20_graphconv_complete_h64_s1,norm,32.0,7.044883921843797
+n20_graphconv_complete_h64_s1,norm,128.0,7.0311262839256905
+n20_graphconv_complete_h64_s2,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_s2,raw,0.01,12.578441963096877
+n20_graphconv_complete_h64_s2,raw,0.02,12.187578625516519
+n20_graphconv_complete_h64_s2,raw,0.05,11.50980425927522
+n20_graphconv_complete_h64_s2,raw,0.1,10.922511143316926
+n20_graphconv_complete_h64_s2,raw,0.25,9.4030455337935
+n20_graphconv_complete_h64_s2,raw,0.5,8.324746538700644
+n20_graphconv_complete_h64_s2,raw,0.75,7.7738890483411
+n20_graphconv_complete_h64_s2,raw,1.0,7.563548293289904
+n20_graphconv_complete_h64_s2,raw,1.5,7.188194465086466
+n20_graphconv_complete_h64_s2,raw,2.0,7.156730627968183
+n20_graphconv_complete_h64_s2,raw,5.0,6.7476601808560535
+n20_graphconv_complete_h64_s2,raw,10.0,6.782717356042753
+n20_graphconv_complete_h64_s2,raw,50.0,6.734187910650299
+n20_graphconv_complete_h64_s2,raw,1000.0,6.654286315620207
+n20_graphconv_complete_h64_s2,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_s2,norm,0.1,12.554532382264952
+n20_graphconv_complete_h64_s2,norm,0.25,11.975809573733956
+n20_graphconv_complete_h64_s2,norm,0.5,11.356055253123719
+n20_graphconv_complete_h64_s2,norm,1.0,10.59618604482666
+n20_graphconv_complete_h64_s2,norm,2.0,9.39748587950845
+n20_graphconv_complete_h64_s2,norm,4.0,8.441723558343577
+n20_graphconv_complete_h64_s2,norm,8.0,7.478604537462874
+n20_graphconv_complete_h64_s2,norm,16.0,7.129071899516671
+n20_graphconv_complete_h64_s2,norm,32.0,6.769885467403451
+n20_graphconv_complete_h64_s2,norm,128.0,6.73380934894659
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.01,12.494693638677747
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.02,12.1224030921586
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.05,11.584047974524813
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.1,10.854076457223455
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.25,9.610532658710001
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.5,8.63001738660638
+n20_graphconv_complete_h64_t500_e600_s0,raw,0.75,8.050244001283458
+n20_graphconv_complete_h64_t500_e600_s0,raw,1.0,7.846821646593179
+n20_graphconv_complete_h64_t500_e600_s0,raw,1.5,7.626712601705816
+n20_graphconv_complete_h64_t500_e600_s0,raw,2.0,7.456795725855892
+n20_graphconv_complete_h64_t500_e600_s0,raw,5.0,7.175950703893031
+n20_graphconv_complete_h64_t500_e600_s0,raw,10.0,7.0839451130172595
+n20_graphconv_complete_h64_t500_e600_s0,raw,50.0,7.090730717674034
+n20_graphconv_complete_h64_t500_e600_s0,raw,1000.0,7.112171388359924
+n20_graphconv_complete_h64_t500_e600_s0,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s0,norm,0.1,12.454217889328111
+n20_graphconv_complete_h64_t500_e600_s0,norm,0.25,11.836879256347032
+n20_graphconv_complete_h64_t500_e600_s0,norm,0.5,11.380282295319354
+n20_graphconv_complete_h64_t500_e600_s0,norm,1.0,10.672265421676668
+n20_graphconv_complete_h64_t500_e600_s0,norm,2.0,9.545954674256219
+n20_graphconv_complete_h64_t500_e600_s0,norm,4.0,8.611334338629579
+n20_graphconv_complete_h64_t500_e600_s0,norm,8.0,7.782827601800341
+n20_graphconv_complete_h64_t500_e600_s0,norm,16.0,7.458841064697706
+n20_graphconv_complete_h64_t500_e600_s0,norm,32.0,7.274360796403498
+n20_graphconv_complete_h64_t500_e600_s0,norm,128.0,7.156235963565591
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.01,12.486530966474149
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.02,12.221784734670411
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.05,11.539395369853079
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.1,10.945723399431577
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.25,9.394378431430827
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.5,8.393952086019336
+n20_graphconv_complete_h64_t500_e600_s1,raw,0.75,7.716484789495235
+n20_graphconv_complete_h64_t500_e600_s1,raw,1.0,7.428165724516531
+n20_graphconv_complete_h64_t500_e600_s1,raw,1.5,7.183903839907047
+n20_graphconv_complete_h64_t500_e600_s1,raw,2.0,7.091438393580164
+n20_graphconv_complete_h64_t500_e600_s1,raw,5.0,6.897443457795749
+n20_graphconv_complete_h64_t500_e600_s1,raw,10.0,6.7811232702225555
+n20_graphconv_complete_h64_t500_e600_s1,raw,50.0,6.638072198962021
+n20_graphconv_complete_h64_t500_e600_s1,raw,1000.0,6.65475642801783
+n20_graphconv_complete_h64_t500_e600_s1,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s1,norm,0.1,12.453802695859306
+n20_graphconv_complete_h64_t500_e600_s1,norm,0.25,12.042903750137572
+n20_graphconv_complete_h64_t500_e600_s1,norm,0.5,11.289512260741802
+n20_graphconv_complete_h64_t500_e600_s1,norm,1.0,10.62945246857184
+n20_graphconv_complete_h64_t500_e600_s1,norm,2.0,9.370752644532487
+n20_graphconv_complete_h64_t500_e600_s1,norm,4.0,8.275294606010672
+n20_graphconv_complete_h64_t500_e600_s1,norm,8.0,7.439813057144507
+n20_graphconv_complete_h64_t500_e600_s1,norm,16.0,7.026903680655491
+n20_graphconv_complete_h64_t500_e600_s1,norm,32.0,6.920215962330209
+n20_graphconv_complete_h64_t500_e600_s1,norm,128.0,6.754484732094448
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.01,12.396495303311067
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.02,12.036352800970471
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.05,11.531758638604988
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.1,10.928092045253987
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.25,9.807105967989909
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.5,8.439525262873861
+n20_graphconv_complete_h64_t500_e600_s2,raw,0.75,8.125501950712934
+n20_graphconv_complete_h64_t500_e600_s2,raw,1.0,7.867146616008247
+n20_graphconv_complete_h64_t500_e600_s2,raw,1.5,7.5809794770621775
+n20_graphconv_complete_h64_t500_e600_s2,raw,2.0,7.391026781443703
+n20_graphconv_complete_h64_t500_e600_s2,raw,5.0,7.318385394825098
+n20_graphconv_complete_h64_t500_e600_s2,raw,10.0,7.336537784800193
+n20_graphconv_complete_h64_t500_e600_s2,raw,50.0,7.390371579765831
+n20_graphconv_complete_h64_t500_e600_s2,raw,1000.0,7.355057774097337
+n20_graphconv_complete_h64_t500_e600_s2,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_e600_s2,norm,0.1,12.298233337661898
+n20_graphconv_complete_h64_t500_e600_s2,norm,0.25,12.053073533608615
+n20_graphconv_complete_h64_t500_e600_s2,norm,0.5,11.404630240180769
+n20_graphconv_complete_h64_t500_e600_s2,norm,1.0,10.76819136233112
+n20_graphconv_complete_h64_t500_e600_s2,norm,2.0,9.760207716254767
+n20_graphconv_complete_h64_t500_e600_s2,norm,4.0,8.561590212675899
+n20_graphconv_complete_h64_t500_e600_s2,norm,8.0,7.8524352578142205
+n20_graphconv_complete_h64_t500_e600_s2,norm,16.0,7.442395657469027
+n20_graphconv_complete_h64_t500_e600_s2,norm,32.0,7.316369626291752
+n20_graphconv_complete_h64_t500_e600_s2,norm,128.0,7.346302154777923
+n20_graphconv_complete_h64_t500_s0,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s0,raw,0.01,12.67137705547786
+n20_graphconv_complete_h64_t500_s0,raw,0.02,12.670102444845734
+n20_graphconv_complete_h64_t500_s0,raw,0.05,12.680088329386665
+n20_graphconv_complete_h64_t500_s0,raw,0.1,12.670984515085012
+n20_graphconv_complete_h64_t500_s0,raw,0.25,12.638685844350167
+n20_graphconv_complete_h64_t500_s0,raw,0.5,12.641508676217555
+n20_graphconv_complete_h64_t500_s0,raw,0.75,12.635996885568176
+n20_graphconv_complete_h64_t500_s0,raw,1.0,12.623711468780138
+n20_graphconv_complete_h64_t500_s0,raw,1.5,12.624952982669756
+n20_graphconv_complete_h64_t500_s0,raw,2.0,12.636544596236455
+n20_graphconv_complete_h64_t500_s0,raw,5.0,12.633068898356976
+n20_graphconv_complete_h64_t500_s0,raw,10.0,12.611792908651088
+n20_graphconv_complete_h64_t500_s0,raw,50.0,12.624370208411067
+n20_graphconv_complete_h64_t500_s0,raw,1000.0,12.628839668504309
+n20_graphconv_complete_h64_t500_s0,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s0,norm,0.1,12.67137705547786
+n20_graphconv_complete_h64_t500_s0,norm,0.25,12.677412721177157
+n20_graphconv_complete_h64_t500_s0,norm,0.5,12.680088329386665
+n20_graphconv_complete_h64_t500_s0,norm,1.0,12.647322520504055
+n20_graphconv_complete_h64_t500_s0,norm,2.0,12.638685844350167
+n20_graphconv_complete_h64_t500_s0,norm,4.0,12.650780194098322
+n20_graphconv_complete_h64_t500_s0,norm,8.0,12.630668585310108
+n20_graphconv_complete_h64_t500_s0,norm,16.0,12.636544596236455
+n20_graphconv_complete_h64_t500_s0,norm,32.0,12.621944078852383
+n20_graphconv_complete_h64_t500_s0,norm,128.0,12.617782883481325
+n20_graphconv_complete_h64_t500_s1,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,raw,0.01,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,raw,0.02,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,raw,0.05,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,raw,0.1,12.652525233588745
+n20_graphconv_complete_h64_t500_s1,raw,0.25,12.651250622956617
+n20_graphconv_complete_h64_t500_s1,raw,0.5,12.651861929216077
+n20_graphconv_complete_h64_t500_s1,raw,0.75,12.653904305699035
+n20_graphconv_complete_h64_t500_s1,raw,1.0,12.650178893858778
+n20_graphconv_complete_h64_t500_s1,raw,1.5,12.650178893858778
+n20_graphconv_complete_h64_t500_s1,raw,2.0,12.642815271610688
+n20_graphconv_complete_h64_t500_s1,raw,5.0,12.640517246358046
+n20_graphconv_complete_h64_t500_s1,raw,10.0,12.649036147090632
+n20_graphconv_complete_h64_t500_s1,raw,50.0,12.643693381941805
+n20_graphconv_complete_h64_t500_s1,raw,1000.0,12.639343671956173
+n20_graphconv_complete_h64_t500_s1,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,norm,0.1,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,norm,0.25,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,norm,0.5,12.67137705547786
+n20_graphconv_complete_h64_t500_s1,norm,1.0,12.652525233588745
+n20_graphconv_complete_h64_t500_s1,norm,2.0,12.653388734191251
+n20_graphconv_complete_h64_t500_s1,norm,4.0,12.651861929216077
+n20_graphconv_complete_h64_t500_s1,norm,8.0,12.650178893858778
+n20_graphconv_complete_h64_t500_s1,norm,16.0,12.642815271610688
+n20_graphconv_complete_h64_t500_s1,norm,32.0,12.640517246358046
+n20_graphconv_complete_h64_t500_s1,norm,128.0,12.649036147090632
+n20_graphconv_complete_h64_t500_s2,raw,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,raw,0.01,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,raw,0.02,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,raw,0.05,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,raw,0.1,12.648040782624143
+n20_graphconv_complete_h64_t500_s2,raw,0.25,12.658468313553838
+n20_graphconv_complete_h64_t500_s2,raw,0.5,12.65481813946808
+n20_graphconv_complete_h64_t500_s2,raw,0.75,12.650468429482448
+n20_graphconv_complete_h64_t500_s2,raw,1.0,12.660521249030502
+n20_graphconv_complete_h64_t500_s2,raw,1.5,12.643392773829918
+n20_graphconv_complete_h64_t500_s2,raw,2.0,12.647536077640925
+n20_graphconv_complete_h64_t500_s2,raw,5.0,12.604085408767327
+n20_graphconv_complete_h64_t500_s2,raw,10.0,12.597685255818229
+n20_graphconv_complete_h64_t500_s2,raw,50.0,12.593141615311334
+n20_graphconv_complete_h64_t500_s2,raw,1000.0,12.593141615311334
+n20_graphconv_complete_h64_t500_s2,norm,0.0,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,norm,0.1,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,norm,0.25,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,norm,0.5,12.67137705547786
+n20_graphconv_complete_h64_t500_s2,norm,1.0,12.650178893858778
+n20_graphconv_complete_h64_t500_s2,norm,2.0,12.658468313553838
+n20_graphconv_complete_h64_t500_s2,norm,4.0,12.65434484620881
+n20_graphconv_complete_h64_t500_s2,norm,8.0,12.638844304559438
+n20_graphconv_complete_h64_t500_s2,norm,16.0,12.647536077640925
+n20_graphconv_complete_h64_t500_s2,norm,32.0,12.603605765706938
+n20_graphconv_complete_h64_t500_s2,norm,128.0,12.591226867304515
+n20_graphconv_knn10_h64_s0,raw,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s0,raw,0.01,12.472025311084483
+n20_graphconv_knn10_h64_s0,raw,0.02,12.02361103785527
+n20_graphconv_knn10_h64_s0,raw,0.05,11.392892628716199
+n20_graphconv_knn10_h64_s0,raw,0.1,10.403429262992944
+n20_graphconv_knn10_h64_s0,raw,0.25,8.446138718389623
+n20_graphconv_knn10_h64_s0,raw,0.5,7.289370382973448
+n20_graphconv_knn10_h64_s0,raw,0.75,6.734746993308887
+n20_graphconv_knn10_h64_s0,raw,1.0,6.442268137026149
+n20_graphconv_knn10_h64_s0,raw,1.5,6.357616917611432
+n20_graphconv_knn10_h64_s0,raw,2.0,6.392012522791934
+n20_graphconv_knn10_h64_s0,raw,5.0,6.216269890635609
+n20_graphconv_knn10_h64_s0,raw,10.0,6.185706867936412
+n20_graphconv_knn10_h64_s0,raw,50.0,6.349166924610974
+n20_graphconv_knn10_h64_s0,raw,1000.0,6.433581904816158
+n20_graphconv_knn10_h64_s0,norm,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s0,norm,0.1,12.347052799799327
+n20_graphconv_knn10_h64_s0,norm,0.25,11.826153263905068
+n20_graphconv_knn10_h64_s0,norm,0.5,11.09384029414912
+n20_graphconv_knn10_h64_s0,norm,1.0,9.954187085129343
+n20_graphconv_knn10_h64_s0,norm,2.0,8.47914481630316
+n20_graphconv_knn10_h64_s0,norm,4.0,7.312446883297662
+n20_graphconv_knn10_h64_s0,norm,8.0,6.4122297638551204
+n20_graphconv_knn10_h64_s0,norm,16.0,6.386095182337265
+n20_graphconv_knn10_h64_s0,norm,32.0,6.2281585028085305
+n20_graphconv_knn10_h64_s0,norm,128.0,6.227218113580284
+n20_graphconv_knn10_h64_s1,raw,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s1,raw,0.01,12.419891312561216
+n20_graphconv_knn10_h64_s1,raw,0.02,12.02104472785856
+n20_graphconv_knn10_h64_s1,raw,0.05,11.454720179526623
+n20_graphconv_knn10_h64_s1,raw,0.1,10.689250850080935
+n20_graphconv_knn10_h64_s1,raw,0.25,8.869816745778742
+n20_graphconv_knn10_h64_s1,raw,0.5,7.614156897744126
+n20_graphconv_knn10_h64_s1,raw,0.75,7.318204350827651
+n20_graphconv_knn10_h64_s1,raw,1.0,7.130941676379878
+n20_graphconv_knn10_h64_s1,raw,1.5,7.037336778012169
+n20_graphconv_knn10_h64_s1,raw,2.0,6.903234377643464
+n20_graphconv_knn10_h64_s1,raw,5.0,6.821790266561269
+n20_graphconv_knn10_h64_s1,raw,10.0,6.795730060977314
+n20_graphconv_knn10_h64_s1,raw,50.0,6.888110135381956
+n20_graphconv_knn10_h64_s1,raw,1000.0,6.931236283126141
+n20_graphconv_knn10_h64_s1,norm,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s1,norm,0.1,12.247905130755491
+n20_graphconv_knn10_h64_s1,norm,0.25,11.852363211315238
+n20_graphconv_knn10_h64_s1,norm,0.5,11.281848299288496
+n20_graphconv_knn10_h64_s1,norm,1.0,10.319984835140785
+n20_graphconv_knn10_h64_s1,norm,2.0,8.940167845776623
+n20_graphconv_knn10_h64_s1,norm,4.0,7.55952257441597
+n20_graphconv_knn10_h64_s1,norm,8.0,7.1880126978751715
+n20_graphconv_knn10_h64_s1,norm,16.0,6.910565998377743
+n20_graphconv_knn10_h64_s1,norm,32.0,6.839099732275061
+n20_graphconv_knn10_h64_s1,norm,128.0,6.8535047287695425
+n20_graphconv_knn10_h64_s2,raw,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s2,raw,0.01,12.390391722595597
+n20_graphconv_knn10_h64_s2,raw,0.02,12.14035550959905
+n20_graphconv_knn10_h64_s2,raw,0.05,11.49547677712107
+n20_graphconv_knn10_h64_s2,raw,0.1,10.350322851431969
+n20_graphconv_knn10_h64_s2,raw,0.25,8.361351755820154
+n20_graphconv_knn10_h64_s2,raw,0.5,7.228448208019577
+n20_graphconv_knn10_h64_s2,raw,0.75,6.866670222238239
+n20_graphconv_knn10_h64_s2,raw,1.0,6.676404534128395
+n20_graphconv_knn10_h64_s2,raw,1.5,6.707815903096719
+n20_graphconv_knn10_h64_s2,raw,2.0,6.646841186256534
+n20_graphconv_knn10_h64_s2,raw,5.0,6.69569782821505
+n20_graphconv_knn10_h64_s2,raw,10.0,6.787674987197511
+n20_graphconv_knn10_h64_s2,raw,50.0,6.897217419082268
+n20_graphconv_knn10_h64_s2,raw,1000.0,6.985443264509249
+n20_graphconv_knn10_h64_s2,norm,0.0,12.67137705547786
+n20_graphconv_knn10_h64_s2,norm,0.1,12.310084262278743
+n20_graphconv_knn10_h64_s2,norm,0.25,11.962808067338681
+n20_graphconv_knn10_h64_s2,norm,0.5,11.211728115261419
+n20_graphconv_knn10_h64_s2,norm,1.0,10.00972308506131
+n20_graphconv_knn10_h64_s2,norm,2.0,8.470740773448856
+n20_graphconv_knn10_h64_s2,norm,4.0,7.274110415434719
+n20_graphconv_knn10_h64_s2,norm,8.0,6.632067000441828
+n20_graphconv_knn10_h64_s2,norm,16.0,6.632343994681758
+n20_graphconv_knn10_h64_s2,norm,32.0,6.676852413253768
+n20_graphconv_knn10_h64_s2,norm,128.0,6.822982789698305
+n20_graphconv_knn5_h64_s0,raw,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s0,raw,0.01,12.48306960746205
+n20_graphconv_knn5_h64_s0,raw,0.02,12.072182646551035
+n20_graphconv_knn5_h64_s0,raw,0.05,11.267437812363719
+n20_graphconv_knn5_h64_s0,raw,0.1,10.373135760008177
+n20_graphconv_knn5_h64_s0,raw,0.25,8.682106151441218
+n20_graphconv_knn5_h64_s0,raw,0.5,7.8694938684916576
+n20_graphconv_knn5_h64_s0,raw,0.75,7.72207412011209
+n20_graphconv_knn5_h64_s0,raw,1.0,7.609026372204386
+n20_graphconv_knn5_h64_s0,raw,1.5,7.318355112299769
+n20_graphconv_knn5_h64_s0,raw,2.0,7.357571754578337
+n20_graphconv_knn5_h64_s0,raw,5.0,7.391767633533424
+n20_graphconv_knn5_h64_s0,raw,10.0,7.548703935917706
+n20_graphconv_knn5_h64_s0,raw,50.0,7.63900213025099
+n20_graphconv_knn5_h64_s0,raw,1000.0,7.628440799949698
+n20_graphconv_knn5_h64_s0,norm,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s0,norm,0.1,12.271718592990048
+n20_graphconv_knn5_h64_s0,norm,0.25,11.818773750210774
+n20_graphconv_knn5_h64_s0,norm,0.5,11.00888248518865
+n20_graphconv_knn5_h64_s0,norm,1.0,9.961322120376222
+n20_graphconv_knn5_h64_s0,norm,2.0,8.625050776962413
+n20_graphconv_knn5_h64_s0,norm,4.0,7.861798382115943
+n20_graphconv_knn5_h64_s0,norm,8.0,7.501965086452696
+n20_graphconv_knn5_h64_s0,norm,16.0,7.395599413525633
+n20_graphconv_knn5_h64_s0,norm,32.0,7.3740285319850605
+n20_graphconv_knn5_h64_s0,norm,128.0,7.610390857491933
+n20_graphconv_knn5_h64_s1,raw,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s1,raw,0.01,12.449314144608458
+n20_graphconv_knn5_h64_s1,raw,0.02,12.15161895721948
+n20_graphconv_knn5_h64_s1,raw,0.05,11.284197971655448
+n20_graphconv_knn5_h64_s1,raw,0.1,10.474471773511981
+n20_graphconv_knn5_h64_s1,raw,0.25,8.793807317632451
+n20_graphconv_knn5_h64_s1,raw,0.5,7.9177524168285345
+n20_graphconv_knn5_h64_s1,raw,0.75,7.479186506922926
+n20_graphconv_knn5_h64_s1,raw,1.0,7.421867446940512
+n20_graphconv_knn5_h64_s1,raw,1.5,7.3618649546704
+n20_graphconv_knn5_h64_s1,raw,2.0,7.517713111180743
+n20_graphconv_knn5_h64_s1,raw,5.0,7.539966844985323
+n20_graphconv_knn5_h64_s1,raw,10.0,7.539107052734295
+n20_graphconv_knn5_h64_s1,raw,50.0,7.549816616026296
+n20_graphconv_knn5_h64_s1,raw,1000.0,7.606259913164328
+n20_graphconv_knn5_h64_s1,norm,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s1,norm,0.1,12.436494160888287
+n20_graphconv_knn5_h64_s1,norm,0.25,11.892452411482399
+n20_graphconv_knn5_h64_s1,norm,0.5,10.991121982968759
+n20_graphconv_knn5_h64_s1,norm,1.0,10.091269114289743
+n20_graphconv_knn5_h64_s1,norm,2.0,8.738121135454351
+n20_graphconv_knn5_h64_s1,norm,4.0,8.029995885020366
+n20_graphconv_knn5_h64_s1,norm,8.0,7.401719361302572
+n20_graphconv_knn5_h64_s1,norm,16.0,7.487948836509585
+n20_graphconv_knn5_h64_s1,norm,32.0,7.481880745218708
+n20_graphconv_knn5_h64_s1,norm,128.0,7.538160076347277
+n20_graphconv_knn5_h64_s2,raw,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s2,raw,0.01,12.371662770282056
+n20_graphconv_knn5_h64_s2,raw,0.02,12.121316283080075
+n20_graphconv_knn5_h64_s2,raw,0.05,11.130854602372347
+n20_graphconv_knn5_h64_s2,raw,0.1,10.075818816689853
+n20_graphconv_knn5_h64_s2,raw,0.25,8.303557139786356
+n20_graphconv_knn5_h64_s2,raw,0.5,7.706745077899738
+n20_graphconv_knn5_h64_s2,raw,0.75,7.531373546052736
+n20_graphconv_knn5_h64_s2,raw,1.0,7.425346116878895
+n20_graphconv_knn5_h64_s2,raw,1.5,7.345833230481544
+n20_graphconv_knn5_h64_s2,raw,2.0,7.367271147377132
+n20_graphconv_knn5_h64_s2,raw,5.0,7.2428297385948355
+n20_graphconv_knn5_h64_s2,raw,10.0,7.327359557423061
+n20_graphconv_knn5_h64_s2,raw,50.0,7.435704403203893
+n20_graphconv_knn5_h64_s2,raw,1000.0,7.450552375018422
+n20_graphconv_knn5_h64_s2,norm,0.0,12.67137705547786
+n20_graphconv_knn5_h64_s2,norm,0.1,12.323940645894927
+n20_graphconv_knn5_h64_s2,norm,0.25,11.774541048665636
+n20_graphconv_knn5_h64_s2,norm,0.5,10.887827554814633
+n20_graphconv_knn5_h64_s2,norm,1.0,9.70821743629791
+n20_graphconv_knn5_h64_s2,norm,2.0,8.304626778984467
+n20_graphconv_knn5_h64_s2,norm,4.0,7.693797203184704
+n20_graphconv_knn5_h64_s2,norm,8.0,7.442772141836412
+n20_graphconv_knn5_h64_s2,norm,16.0,7.308970395183193
+n20_graphconv_knn5_h64_s2,norm,32.0,7.32469041980335
+n20_graphconv_knn5_h64_s2,norm,128.0,7.405430507281931

@@ -38,12 +38,16 @@ RUNS_DIR = OUTPUTS_DIR / "runs"
 
 def run_name(args) -> str:
     graph = f"knn{args.k}" if args.graph == "knn" else "complete"
-    return f"n{args.n}_{args.model}_{graph}_h{args.hidden}_s{args.seed}"
+    size = f"_t{args.train_size}" if args.train_size else ""
+    epochs = f"_e{args.epochs}" if args.epochs != 30 else ""
+    return f"n{args.n}_{args.model}_{graph}_h{args.hidden}{size}{epochs}_s{args.seed}"
 
 
 def config_label(args) -> str:
     graph = f"kNN k={args.k}" if args.graph == "knn" else "complete"
-    return f"{args.model}, {graph}"
+    size = f", {args.train_size} train" if args.train_size else ""
+    epochs = f", {args.epochs} epochs" if args.epochs != 30 else ""
+    return f"{args.model}, {graph}{size}{epochs}"
 
 
 @torch.no_grad()
