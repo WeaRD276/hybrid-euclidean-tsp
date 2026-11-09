@@ -57,20 +57,35 @@ Better edge classification did not give better tours. This is the first data poi
 It also means the complete-graph sum aggregation was not the main cause of the coursework
 failure (finding 1 was).
 
-## 5. GAT without edge features collapses to edge length
+## 5. GAT without edge features collapses to edge length; edge features or a kNN graph fix it
 
-At n = 20 all three GAT seeds give AP 0.655 and length ratio 0.694, the same as distance only,
-so the hybrid barely moves (12.36%). At n = 10, GAT is unstable across seeds (AP 0.68 to 0.79).
-This is the coursework's "biased toward short edges" behaviour, now in a different model.
-Whether longer training or edge features in attention fix it is the next experiment.
+| n = 20, 3 seeds | AP | greedy gap % | + 2-opt gap % | train time |
+| --- | ---: | ---: | ---: | ---: |
+| distance only | 0.651 | 12.66 | 1.22 | |
+| GAT, complete graph (coursework model) | 0.655 | 12.36 ± 0.08 | 1.25 ± 0.02 | ~16 min |
+| GAT, kNN k = 10 | 0.76 | 7.79 ± 0.15 | 0.96 ± 0.04 | ~9 min |
+| GATv2 with edge features in attention, complete | 0.81 | 6.54 ± 0.60 | 0.89 ± 0.09 | ~29 min |
+| GraphConv, complete (for reference) | 0.78 | 6.68 ± 0.27 | 0.81 ± 0.05 | ~6 min |
+
+On the complete graph, plain GAT reproduces the coursework's "biased toward short edges"
+behaviour in all three seeds: its AP and length ratio (0.694) equal distance only. Its
+attention sees only node embeddings built from raw coordinates, so it cannot tell near
+nodes from far ones. Giving attention the edge features (GATv2, `edge_dim`) or restricting
+it to the 10 nearest neighbours both remove the collapse. GATv2 then reaches the best AP so
+far at n = 20, but its tours are no better than GraphConv's and it trains five times slower.
+A longer plain-GAT run (100 epochs) was started and stopped for time, so "more training"
+is not ruled out as a fix.
+
+Within GATv2 the seed with the highest AP (0.818) gives the worst greedy gap (7.38%), and
+the one with the lowest AP (0.795) gives the best (6.07%), another case for finding 9.
 
 ## 6. The best fusion is close to "rank by p"
 
 On validation, ranking edges purely by p (the largest λ, where distance only breaks ties) is
-the best setting for the complete-graph GraphConv runs at n = 20, and within 0.4 points of the
-tuned λ for every other run. The weighted sum d − λ·p adds little over ranking by p, which
+the best setting for the complete-graph GraphConv runs at n = 20, and within 0.3 points of the
+tuned λ for every other run at every size. The weighted sum d − λ·p adds little over ranking by p, which
 matters for the hybridization study (WP5). The best raw and normalised score modes are within
-0.35 points of each other on every heatmap (median 0.03), so the scale mismatch between d and p was not a
+0.4 points of each other on every heatmap at every size (median 0.03), so the scale mismatch between d and p was not a
 problem at these sizes.
 
 # Scaling to n = 50 and n = 100
