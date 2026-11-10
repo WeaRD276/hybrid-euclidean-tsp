@@ -1,6 +1,7 @@
 numpy~=2.4.4
 torch~=2.11.0
 matplotlib~=3.10.9
-torch-geometric~=2.7.0elkai~=2.0
+torch-geometric~=2.7.0
+elkai~=2.0
 scipy
 pytest
