@@ -28,6 +28,9 @@ python train.py --n 20 --model graphconv --graph knn --k 10 --seed 0
 # 3. Evaluate every trained run for a size against classical baselines
 python evaluate.py --n 20
 
+# 4. Hybridization mechanisms (pruning, candidate-list 2-opt) for the runs of one size
+python -m experiments.mechanisms --n 50 --runs "graphconv_knn10_h64_s*"
+
 # Tests
 python -m pytest tests
 ```

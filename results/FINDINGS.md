@@ -33,7 +33,7 @@ The learned heatmap beats both non-learned heatmaps, so the model learns more th
 "prefer near neighbours". It does **not** beat farthest insertion, which is a much stronger
 baseline than greedy edge. The thesis has to compare against it.
 
-## 3. After 2-opt, the neural hybrid is the best method tested
+## 3. After 2-opt, the neural hybrid has the lowest mean gap, but not significantly below SoftDist
 
 | method | n = 10 gap % | n = 20 gap % |
 | --- | ---: | ---: |
@@ -43,7 +43,8 @@ baseline than greedy edge. The thesis has to compare against it.
 | **greedy + GraphConv heatmap + 2-opt** | **0.17 ± 0.00** | **0.81 ± 0.05** |
 
 At n = 20, each of the nine GraphConv runs beats greedy + 2-opt per instance: 286 to 323 wins
-against 178 to 218 losses out of 1,000, Wilcoxon p < 1e-4 for every run.
+against 178 to 218 losses out of 1,000, Wilcoxon p < 1e-4 for every run. Against
+SoftDist + 2-opt, however, the difference is not significant at any size (finding 10).
 
 ## 4. A kNN graph improves edge metrics but not tours (H1)
 
@@ -119,8 +120,8 @@ Share of the greedy gap removed by the heatmap:
 
 This is the curve the thesis has to explain. The neural heatmap still helps greedy at n = 100
 (about 620 wins against 380 losses per 1,000 instances after 2-opt, p < 1e-4 against
-greedy + 2-opt), but its margin over SoftDist + 2-opt is only about 0.1 points from n = 20 on.
-That margin has not yet been tested for significance.
+greedy + 2-opt), but its margin over SoftDist + 2-opt is only about 0.1 points from n = 20 on,
+and finding 10 shows it is not significant.
 
 ## 8. At n = 50 the complete-graph model collapses again; the kNN model does not (H1)
 
@@ -143,3 +144,51 @@ At n = 50 and n = 100 the kNN-rank heatmap has a higher AP than GraphConv (0.79 
 0.80 vs 0.74), yet GraphConv gives clearly shorter greedy tours (12.72% vs 14.88% and
 14.83% vs 16.12%). Together with finding 4, this is direct evidence that a better edge
 classifier is not automatically a better guide for greedy.
+
+# Hybridization mechanisms
+
+Script: `experiments/mechanisms.py`; tables: `n_<N>/mechanisms.md`. Heatmaps: GraphConv
+(complete graph at n ≤ 20, kNN k = 10 at n ≥ 50, 3 seeds), SoftDist, kNN rank, and plain
+distance (each node's k nearest neighbours). Each neural run is compared per instance with
+SoftDist under the same mechanism; p is the worst Wilcoxon p over the three seeds.
+
+## 10. Once 2-opt runs to completion, the learned heatmap stops mattering
+
+| fused greedy + full 2-opt, gap % | n = 10 | n = 20 | n = 50 | n = 100 |
+| --- | ---: | ---: | ---: | ---: |
+| SoftDist | 0.19 | 0.89 | 2.37 | 2.99 |
+| GraphConv | 0.17 | 0.81 | 2.31 | 2.88 |
+| neural vs SoftDist, worst-seed p | 0.93 | 0.62 | 0.95 | 0.63 |
+
+Before 2-opt the neural heatmap beats SoftDist at every size (p < 1e-4). After a full 2-opt
+the difference is not significant at any size. Local search erases what the network adds
+over a simple distance-based heatmap. This agrees with Xia et al. (ICML 2024) for MCTS, and
+extends it to greedy construction followed by 2-opt.
+
+## 11. The network helps where the search is weak: tiny candidate lists
+
+Neighbour-list 2-opt from the plain greedy tour, considering only moves that add one of each
+node's top-k heatmap edges:
+
+| candidate source | n = 20, k = 2 | k = 3 | k = 5 | n = 100, k = 2 | k = 3 | k = 5 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| k nearest by distance | 4.92 | 2.31 | 1.30 | 12.63 | 9.00 | 5.12 |
+| SoftDist | 5.07 | 2.43 | 1.28 | 12.69 | 9.02 | 5.13 |
+| GraphConv | 4.41 | 2.11 | 1.29 | 12.47 | 8.86 | 5.05 |
+
+With 2 or 3 candidates per node, the neural lists give shorter tours than SoftDist lists
+(p ≤ 0.009 at n ≤ 50, p ≤ 0.05 at n = 100) and lower mean gaps than plain nearest-neighbour
+lists. With 5 or more candidates the sources are within 0.1 points of each other and the
+neural lists are no longer better (at n = 50, k = 8 they are slightly worse, p ≤ 0.03).
+A likely reason: the 5 nearest neighbours already contain about 93% of the optimal tour edges
+(R@5 in the edge tables). Starting 2-opt from the fused greedy tour gives a similar picture:
+significant at k = 2 at every size, and at k = 3 everywhere except n = 20. Against
+nearest-neighbour lists at k = 2, the gain shrinks with n: 0.80 points at n = 10, 0.51 at
+n = 20 and 0.16 at n = 100.
+
+## 12. Pruning the greedy edge list adds nothing
+
+Letting greedy take only each node's top-k heatmap edges first (k = 2, 3, 5), with the rest
+as a fallback, stays within 0.3 points of the fused greedy at every size. k = 2 is slightly
+worse, and the largest improvement is 0.23 points (SoftDist, n = 50, k = 5). Fused greedy
+with a large λ already takes edges in heatmap order, so pruning changes almost nothing.

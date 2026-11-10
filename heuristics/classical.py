@@ -108,8 +108,18 @@ def farthest_insertion(dist: np.ndarray) -> np.ndarray:
     return np.asarray(tour, dtype=np.int64)
 
 
-def two_opt(dist: np.ndarray, tour: np.ndarray, max_iters: int = 10_000) -> np.ndarray:
-    """Best-improvement 2-opt until no improving move exists."""
+def two_opt(
+    dist: np.ndarray,
+    tour: np.ndarray,
+    max_iters: int = 10_000,
+    candidates: np.ndarray | None = None,
+) -> np.ndarray:
+    """
+    Best-improvement 2-opt until no improving move exists.
+
+    candidates: optional symmetric boolean [n, n] matrix. When given, only moves that
+    add at least one candidate edge are considered (a neighbour-list 2-opt).
+    """
     tour = np.asarray(tour).copy()
     n = len(tour)
     for _ in range(max_iters):
@@ -122,6 +132,9 @@ def two_opt(dist: np.ndarray, tour: np.ndarray, max_iters: int = 10_000) -> np.n
             - dist[a, b][:, None]
             - dist[a, b][None, :]
         )
+        if candidates is not None:
+            allowed = candidates[a[:, None], a[None, :]] | candidates[b[:, None], b[None, :]]
+            delta = np.where(allowed, delta, 0.0)
         delta = np.triu(delta, k=2)
         delta[0, n - 1] = 0.0
         i, j = np.unravel_index(np.argmin(delta), delta.shape)
@@ -129,3 +142,13 @@ def two_opt(dist: np.ndarray, tour: np.ndarray, max_iters: int = 10_000) -> np.n
             break
         tour[i + 1 : j + 1] = tour[i + 1 : j + 1][::-1]
     return tour
+
+
+def candidate_mask(heat: np.ndarray, k: int) -> np.ndarray:
+    """Symmetric candidate set: j is a candidate of i if it is in i's top-k by heat, or vice versa."""
+    n = heat.shape[0]
+    h = heat - np.diag(np.full(n, np.inf))
+    top = np.argsort(-h, axis=1, kind="stable")[:, :k]
+    mask = np.zeros((n, n), dtype=bool)
+    mask[np.repeat(np.arange(n), k), top.ravel()] = True
+    return mask | mask.T

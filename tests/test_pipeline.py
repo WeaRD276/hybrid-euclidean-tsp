@@ -73,3 +73,18 @@ def test_graph_labels_and_prob_matrix_symmetry():
         P = prob_matrix(12, ei, np.random.default_rng(0).random(ei.shape[1]))
         assert np.allclose(P, P.T)
     assert knn_mask(dist, 4).sum(axis=1).min() >= 4
+
+
+def test_candidate_two_opt():
+    from heuristics.classical import candidate_mask
+
+    for seed in range(5):
+        _, dist = instance(30, seed)
+        start = greedy_edge(dist)
+        full = two_opt(dist, start)
+        cands = candidate_mask(knn_rank_heatmap(dist), 3)
+        restricted = two_opt(dist, start, candidates=cands)
+        assert is_tour(restricted, 30)
+        assert tour_length(dist, restricted) <= tour_length(dist, start) + 1e-12
+        everything = two_opt(dist, start, candidates=np.ones((30, 30), dtype=bool))
+        assert tour_length(dist, everything) == pytest.approx(tour_length(dist, full))
